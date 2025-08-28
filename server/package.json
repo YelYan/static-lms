@@ -4,13 +4,13 @@
   "type": "module",
   "description": "",
   "main": "index.js",
-   "imports": {
+  "imports": {
     "#*": "./src/*"
   },
   "scripts": {
-   "dev": "tsx --watch --env-file .env.development src/server.ts",
-   "dev:staging": "tsx --watch --env-file .env.staging src/server.ts", 
-   "dev:prod": "tsx --watch --env-file .env.production src/server.ts",
+    "dev": "tsx --watch --env-file .env.development src/server.ts",
+    "dev:staging": "tsx --watch --env-file .env.staging src/server.ts",
+    "dev:prod": "tsx --watch --env-file .env.production src/server.ts",
     "start": "node --env-file .env dist/server.js",
     "build": "tsc",
     "type-check": "tsc --noEmit",
@@ -24,12 +24,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@tsconfig/node22": "^22.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/express-validator": "^2.20.33",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.96",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.3.0",
     "eslint": "^9.34.0",
     "eslint-plugin-perfectionist": "^4.15.0",
