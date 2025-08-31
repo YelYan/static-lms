@@ -17,6 +17,10 @@ class UserService {
         // await emailService.sendWelcomeEmail(newUser.email);
         return newUser
     }
+
+    public async getAllUsers() {
+        return await User.find({})
+    }
 }
 
 export default new UserService();

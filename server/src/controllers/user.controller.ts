@@ -9,3 +9,8 @@ export const createUser = asyncErrorWrapper(async (req : Request, res : Response
     res.status(201).json(newUser);
 })
 
+export const getAllUsers = asyncErrorWrapper(async(req :Request, res : Response) => {
+    const users = await UserService.getAllUsers();
+    res.status(200).json(users);
+})
+

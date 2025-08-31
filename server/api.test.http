@@ -1,0 +1,5 @@
+### Test api
+
+
+
+GET http://localhost:9000/api/v1/user/get-all-users HTTP/1.1
