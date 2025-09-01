@@ -1,7 +1,9 @@
+import EntityNotFoundError from "#errors/EntityNotFoundError.js";
 import { IUser } from "#models/user.model.js";
 import UserService from "#services/user.service.js";
 import { Request, Response } from "express";
 import asyncErrorWrapper from "express-async-handler"
+
 
 export const createUser = asyncErrorWrapper(async (req : Request, res : Response) => {
     const userData = req.body as IUser;
@@ -10,6 +12,11 @@ export const createUser = asyncErrorWrapper(async (req : Request, res : Response
 })
 
 export const getAllUsers = asyncErrorWrapper(async(req :Request, res : Response) => {
+        throw new EntityNotFoundError({
+            code : "ERR_NF",
+            message : "Entity not found!",
+            statusCode : 404,
+        })
     const users = await UserService.getAllUsers();
     res.status(200).json(users);
 })

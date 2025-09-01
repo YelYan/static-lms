@@ -31,7 +31,7 @@ app.get("/" , (req : Request,res : Response) => {
  // Mount the entire API router under the '/api' path
 app.use("/api/v1" , apiRouter)
 
-// error middlewares must be defined last
+// error middlewares must be defined last to catch api routes errors
 app.use(errorHandler)
 
 // Server runs

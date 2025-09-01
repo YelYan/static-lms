@@ -1,4 +1,5 @@
 import config from "#config/config.js";
+import CustomError from "#errors/customError.js";
 import { getErrorMessages } from "#utils/utils.js";
 import { NextFunction, Request, Response  } from "express";
 
@@ -16,10 +17,23 @@ export default function errorHandler (
 
     console.error(error);
 
-    const statusCode = typeof error === "object" && error !== null && "statusCode" in error && typeof (error as { statusCode?: unknown }).statusCode === "number"
-        ? (error as { statusCode: number }).statusCode
-        : 500;
+    if(error instanceof CustomError){
+        res.status(error.statusCode).json({
+            error : {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                code : error.code,
+                message : error.message,
+            }
+        })
+        return;
+    }
+
+
     const message = getErrorMessages(error) || "An error occurred. Please view logs for more details!";
 
-    res.status(statusCode).json({ message });
+    res.status(500).json({  
+        error : {
+            message,
+        }
+    });
 } 
