@@ -20,4 +20,10 @@ export default tseslint.config(
     },
   },
   perfectionist.configs["recommended-natural"],
+   {
+    rules: {
+      // This line disables the rule for all files covered by this config.
+      'perfectionist/sort-objects': 'off',
+    },
+  },
 );

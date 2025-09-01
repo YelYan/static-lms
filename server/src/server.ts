@@ -2,11 +2,11 @@ import apiRouter from "#api/index.js";
 import config from "#config/config.js";
 import connectDb from "#config/connectDb.js";
 import errorHandler from "#middleware/errHandler.js";
+import morganMiddleware from "#middleware/morgan-middleware.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { Request, Response  } from "express";
-import morgan from "morgan";
 
 const app = express();
 
@@ -15,7 +15,7 @@ await connectDb();
 
 // Middleware
 app.disable("x-powered-by");
-app.use(morgan("dev"));
+app.use(morganMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
