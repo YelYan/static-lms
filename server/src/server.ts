@@ -3,12 +3,15 @@ import config from "#config/config.js";
 import connectDb from "#config/connectDb.js";
 import errorHandler from "#middleware/errHandler.js";
 import morganMiddleware from "#middleware/morgan-middleware.js";
+import { loadEnv } from "#utils/loadEnv.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { Request, Response  } from "express";
-
 const app = express();
+
+//load env
+loadEnv();
 
 // Connect to database
 await connectDb();

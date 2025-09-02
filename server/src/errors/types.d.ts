@@ -1,1 +1,1 @@
-type ErrorCode = "ERR_NF" | "ERR_VALIDATION"
+type ErrorCode ="ERR_AUTH" | "ERR_NF" | "ERR_VALIDATION" 
