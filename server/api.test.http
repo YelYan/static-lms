@@ -1,8 +1,30 @@
-### Test api
-GET http://localhost:9000/ HTTP/1.1
-
 ### get all users
-GET http://localhost:9000/api/v1/user/get-all-users HTTP/1.1
+GET http://localhost:9000/api/v1/user/get-all-user HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODg4Y2JlYzVhNmM4NTkyYzhlODA4MTciLCJpYXQiOjE3NTY5MDE3NjgsImV4cCI6MTc1Njk4ODE2OCwiaXNzIjoibWVybi1zdGFydGVyIn0.MGpTDXb4h1I3TkqbFzhuclR6wtTLbKilSUUexYXfWhY
+
+### create user
+POST http://localhost:9000/api/v1/user/create-user HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODg4Y2JlYzVhNmM4NTkyYzhlODA4MTciLCJpYXQiOjE3NTY5MDE3NjgsImV4cCI6MTc1Njk4ODE2OCwiaXNzIjoibWVybi1zdGFydGVyIn0.MGpTDXb4h1I3TkqbFzhuclR6wtTLbKilSUUexYXfWhY
+Content-Type: application/json
+
+{
+  "name": "thel",
+  "email": "thelthel@example.com",
+  "password": "123456789"
+}
 
 #### testing api
 GET http://localhost:9000/api/v1/test HTTP/1.1
+
+### get all products
+GET http://localhost:9000/api/v1/product/get-all-product HTTP/1.1
+
+### create product
+POST http://localhost:9000/api/v1/product/create-product HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "price": 100,
+    "description": "sample product"
+}

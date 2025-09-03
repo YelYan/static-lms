@@ -1,11 +1,11 @@
 import User, {IUser} from "#models/user.model.js";
 
 class UserService {
-    public async createUser  (userData : IUser) {
+    public async createUser(userData: IUser) {
         //1. business logic: check user already exist or not
-        const existingUser = await User.findOne({email : userData.email})
+        const existingUser = await User.findOne({ email: userData.email })
 
-        if(existingUser){
+        if (existingUser) {
             const error = new Error("User already exists");
             throw error
         }

@@ -1,4 +1,3 @@
-// import logger from "#logger.js";
 import { IUser } from "#models/user.model.js";
 import UserService from "#services/user.service.js";
 import { Request, Response } from "express";

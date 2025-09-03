@@ -6,8 +6,8 @@ import jwt,{ JwtPayload } from "jsonwebtoken";
 const authenticateUser = (req :Request, res :Response, next:NextFunction) => {
     const authHeader = req.headers.authorization;
 
-
-    if(!authHeader || authHeader.startsWith("Bearer")){
+    // if authorization header is missing and do not contain a valid token
+    if(!authHeader?.startsWith("Bearer")) {
         throw new AuthenticationError({
             code : "ERR_AUTH",
             message : "Authorization header missing or malformed",

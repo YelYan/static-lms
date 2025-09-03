@@ -1,12 +1,15 @@
-import mongoose from "mongoose";
+import {Document, model, Schema} from "mongoose";
 
-const productSchema = new mongoose.Schema({
+// The IProduct interface defines the shape of our Product document
+export interface IProduct extends Document {
+    description : string;
+    name : string;
+    price : number;
+}
+
+const productSchema = new Schema({
     description : {
             type : String
-    },
-    image : {
-        required : [true , "Please provide produt image"],
-        type : String
     },
     name : {
         required : [true , "Please provide product name"],
@@ -19,6 +22,6 @@ const productSchema = new mongoose.Schema({
 
 },   { timestamps: true })
 
-const Product = mongoose.model("Product", productSchema);
+const Product = model("Product", productSchema);
 
 export default Product
