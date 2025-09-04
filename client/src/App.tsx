@@ -1,33 +1,66 @@
-import { Button } from "@/components/ui/button";
-import { Routes, Route } from "react-router";
+import { Suspense } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router";
+import Layout from "./layouts/Layout";
+import { LazyHome } from "./routes/lazy";
+import { privateRoutes, publicRoutes } from "./routes";
+import NotFound from "./pages/NotFound";
 
-import About from "./pages/about";
-import NotFound from "./pages/notfound";
+const routes = createRoutesFromElements(
+  <Route element={<Layout />}>
+    <Route
+      index
+      path="/"
+      element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <LazyHome />
+        </Suspense>
+      }
+    />
 
-const Home = () => {
-  return (
-    <div>
-      <h1 className="text-center text-4xl text-red-500">Hello world</h1>
+    {/* Private routes */}
+    <Route>
+      {privateRoutes.map((route, index: number) => (
+        <Route
+          key={route.key + index}
+          path={route.path}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              {route.element}
+            </Suspense>
+          }
+        />
+      ))}
+    </Route>
 
-      <Button
-        variant={"default"}
-        className="text-green-500 cursor-pointer bg-yellow-400"
-      >
-        Click me
-      </Button>
-    </div>
-  );
-};
+    {/* Public routes */}
+    <Route>
+      {publicRoutes.map((route, index: number) => (
+        <Route
+          key={route.key + index}
+          path={route.path}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              {route.element}
+            </Suspense>
+          }
+        />
+      ))}
+    </Route>
 
+    {/* Redirect any unknown routes to home */}
+    <Route path="*" element={<NotFound />} />
+    {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+  </Route>
+);
+
+const router = createBrowserRouter(routes);
 const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
