@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { Hero, Header, Footer, SearchBar } from "@/components";
+import { Hero, Header, Footer, SearchBar } from "@/shared/common";
 const Layout = () => {
   return (
     <main className="min-h-screen flex flex-col">

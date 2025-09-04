@@ -1,11 +1,10 @@
-import type { RoutesT } from "./route.type";
+import type { RoutesT } from "../route.type";
 import {
   LazyLogin,
-  LazyOTPPage,
-  LazyResetPassword,
   LazyRegister,
+  LazyResetPassword,
   LazyForgotPassword,
-} from "./lazy";
+} from "../lazy";
 
 const authRoutes: RoutesT = [
   {
@@ -27,11 +26,6 @@ const authRoutes: RoutesT = [
     key: "reset-password",
     path: "/reset-password/:userId/:resetToken",
     element: <LazyResetPassword />,
-  },
-  {
-    key: "otp",
-    path: "/otp",
-    element: <LazyOTPPage />,
   },
 ];
 

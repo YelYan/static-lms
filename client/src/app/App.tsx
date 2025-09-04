@@ -5,10 +5,10 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router";
-import Layout from "./layouts/Layout";
+import Layout from "@/shared/layouts/Layout";
 import { LazyHome } from "./routes/lazy";
 import { privateRoutes, publicRoutes } from "./routes";
-import NotFound from "./pages/NotFound";
+import NotFound from "@/features/NotFound/NotFound";
 
 const routes = createRoutesFromElements(
   <Route element={<Layout />}>
