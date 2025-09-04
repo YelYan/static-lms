@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import  {Document,model,Schema, } from "mongoose"
 
 // The IUser interface defines the shape of our User document
@@ -9,25 +10,26 @@ export interface IUser extends Document {
 
 const userSchema = new Schema({
     email: { 
-        match: [
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-        "Please fill a valid email address",
-        ],
         required: true,
         type: String,  
         unique: true,
     },
     name: { 
-        required: [true, "Please Provide Name"],
         type: String 
     },
     password: { 
-        minLength : [6 , "Password must be at least 6 characters"],
-        required: [true, "Please Provide Password"],
         select : false,
         type: String, 
     },
 },   { timestamps: true });
+
+userSchema.pre("save", async function (this: IUser, next) {
+    const salt = await bcrypt.genSalt(10);
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, salt);
+    }
+    next();
+});
 
 const User = model<IUser>("User", userSchema);
 

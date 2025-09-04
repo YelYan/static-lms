@@ -3,9 +3,9 @@ import ReduxProvider from "./ReduxProvides";
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ReduxProvider>
-      <QueryProviders>{children}</QueryProviders>
-    </ReduxProvider>
+    <QueryProviders>
+      <ReduxProvider>{children}</ReduxProvider>
+    </QueryProviders>
   );
 };
 

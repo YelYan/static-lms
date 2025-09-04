@@ -2,7 +2,7 @@ import Joi from "joi";
 
 export const userSchemaValidate = Joi.object({
     name : Joi.string()
-    .alphanum() // Must contain only alphanumeric characters
+    //.alphanum() // Must contain only alphanumeric characters
     .min(3)
     .max(30)
     .required()
@@ -15,6 +15,32 @@ export const userSchemaValidate = Joi.object({
   }), 
 
 password: Joi.string()
+  .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+  .min(6)
+  .max(25)
+  .required()
+  .messages({
+    "string.base": "Password must be a string.",
+    "string.empty": "Password cannot be empty.",
+    "string.min": "Password must be at least 6 characters long.",
+    "string.max": "Password cannot exceed 25 characters.",
+    "string.pattern.base": "Password must contain only letters and numbers.",
+    "any.required": "Password is required."
+  }),
+
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }) // Validate email format
+    .required() 
+    .messages({
+    "string.base": "Email must be a string.",
+    "string.empty": "Email cannot be empty.",
+    "string.email": "Please provide a valid email address.",
+    "any.required": "Email is required."
+  })
+})
+
+export const loginSchemaValidate = Joi.object({
+    password: Joi.string()
   .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
   .min(6)
   .max(25)
