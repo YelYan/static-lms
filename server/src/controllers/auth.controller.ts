@@ -12,7 +12,7 @@ export const login = asyncErrorWrapper(async (req : Request, res : Response,) =>
         maxAge: 86400000, // 1 day
     }
 
-    res.cookie("auth_token", result.token , cookieOptions);
+    res.cookie("token", result.token , cookieOptions);
     res.status(200).json({ userId: result.userId });
 });
 
@@ -23,6 +23,6 @@ export const register = asyncErrorWrapper(async (req :Request, res : Response) =
 })
 
 export const logout = asyncErrorWrapper((req, res) => {
-    res.cookie("auth_token", "", { maxAge: 0 , expires: new Date(0)});
+    res.cookie("token", "", { maxAge: 0 , expires: new Date(0)});
     res.status(200).json({ message: "Logged out successfully" });
 });

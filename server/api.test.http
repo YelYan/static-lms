@@ -1,6 +1,5 @@
 ### get all users
 GET http://localhost:9000/api/v1/user/get-all-user HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI5ZTFhNmFlMGI3MDYxZDMwNDUzN2MiLCJlbWFpbCI6ImNoYXNlQGV4YW1wbGUuY29tIiwiaWF0IjoxNzU3MDE0MjM3LCJleHAiOjE3NTcxMDA2Mzd9.6g8iVo9rlD56J-gXxbjiLyK7TUFLCg_-vMp8UHcEWfk
 
 ### create user 
 POST http://localhost:9000/api/v1/user/create-user HTTP/1.1
@@ -45,5 +44,8 @@ Content-Type: application/json
 
 {
   "email": "chase@example.com",
-  "password": "1234567894"
+  "password": "123456789"
 }
+
+### logout user
+POST http://localhost:9000/api/v1/auth/logout HTTP/1.1

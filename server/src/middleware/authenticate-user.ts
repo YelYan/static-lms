@@ -4,18 +4,30 @@ import { NextFunction, Request, Response } from "express";
 import jwt,{ JwtPayload } from "jsonwebtoken";
 
 const authenticateUser = (req :Request, res :Response, next:NextFunction) => {
-    const authHeader = req.headers.authorization;
+    const token = (req.cookies as Record<string, string>).token; // get token from cookie
 
-    // if authorization header is missing and do not contain a valid token
-    if(!authHeader?.startsWith("Bearer")) {
+    if(!token) {
+        throw new AuthenticationError({ 
+            code : "ERR_AUTH",
+            message : "Token missing in cookies or malformed",
+            statusCode : 401,
+        })
+    }
+    /*
+    ---This one is if you want to get token from authorization header---
+        const authHeader = req.headers.authorization;
+        // if authorization header is missing and do not contain a valid token
+        if(!authHeader?.startsWith("Bearer")) {
         throw new AuthenticationError({
             code : "ERR_AUTH",
             message : "Authorization header missing or malformed",
             statusCode : 401,
         })
-    }
+        }
 
-    const token = authHeader.split(" ")[1]; // get jwt token
+     const token = authHeader.split(" ")[1]; // get jwt token
+     */
+
 
     try {
         const decoded = jwt.verify(token, config.appSecret);

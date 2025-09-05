@@ -6,7 +6,7 @@ import {Router} from 'express';
 
 const router = Router();
 
-router.get("/get-all-user" , getAllUsers)
+router.get("/get-all-user" ,authenticateUser, getAllUsers)
 router.post("/create-user",authenticateUser, validateRequest(userSchemaValidate) , createUser)
 
 export default router
