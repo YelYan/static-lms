@@ -21,7 +21,10 @@ app.disable("x-powered-by");
 app.use(morganMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: config.FRONTEND_URL,
+}));
 app.use(cookieParser());
 
 app.get("/" , (req : Request,res : Response) => {
