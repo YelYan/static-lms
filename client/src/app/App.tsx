@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -60,7 +61,12 @@ const routes = createRoutesFromElements(
 
 const router = createBrowserRouter(routes);
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster position="top-right" />
+    </>
+  );
 };
 
 export default App;
