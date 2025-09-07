@@ -6,6 +6,35 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 class AuthService {
+    public async forgotPassword (email : string) {
+        if(!email) {
+            const error = new AuthenticationError({
+                code: "ERR_AUTH",
+                message: "Please enter your email",
+                statusCode: 400
+            });
+            throw error
+        }
+
+        const existingUser = await User.findOne({email})
+
+        if(!existingUser) {
+            const error = new AuthenticationError({
+                code: "ERR_AUTH",
+                message: "No email could not be send",
+                statusCode: 404
+            });
+            throw error
+        }
+
+        const payload = {userId : existingUser._id , email : existingUser.email};
+        const resetToken = jwt.sign(payload, config.appSecret as unknown as string, {expiresIn: '15m'});
+
+        const resetLink = `${config.FRONTEND_URL}/reset-password/${existingUser._id as string}/${resetToken}`;
+        
+
+    }
+
     public async login (userData : IUser) {
         //1. business logic: check user already exist or not
         const existingUser = await User.findOne({ email: userData.email }).select("+password");
@@ -38,6 +67,7 @@ class AuthService {
         return { token , userId: existingUser._id };
     }
 
+
     public async register (userData : IUser) {
         //1. business logic: check user already exist or not
         const existingUser = await User.findOne({ email: userData.email })
@@ -58,6 +88,8 @@ class AuthService {
         // await emailService.sendWelcomeEmail(newUser.email);
         return newUser
     }
+
+
 }
 
 export default new AuthService();

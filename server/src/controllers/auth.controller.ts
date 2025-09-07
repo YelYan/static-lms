@@ -27,3 +27,8 @@ export const logout = asyncErrorWrapper((req, res) => {
     res.cookie("token", "", { maxAge: 0 , expires: new Date(0)});
     res.status(200).json({ message: "Logged out successfully" });
 });
+
+export const forgotPassword = asyncErrorWrapper(async (req : Request, res : Response) => {
+    const {email} = req.body as {email : string};
+    const result = await authService.forgotPassword(email);
+})
