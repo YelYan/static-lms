@@ -10,6 +10,7 @@ import Layout from "@/shared/layouts/Layout";
 import { LazyHome } from "./routes/lazy";
 import { privateRoutes, publicRoutes } from "./routes";
 import NotFound from "@/features/NotFound/NotFound";
+import { LoadingSpinner } from "@/shared/common";
 
 const routes = createRoutesFromElements(
   <Route element={<Layout />}>
@@ -17,7 +18,7 @@ const routes = createRoutesFromElements(
       index
       path="/"
       element={
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<LoadingSpinner />}>
           <LazyHome />
         </Suspense>
       }
@@ -30,9 +31,7 @@ const routes = createRoutesFromElements(
           key={route.key + index}
           path={route.path}
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              {route.element}
-            </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
           }
         />
       ))}
@@ -45,9 +44,7 @@ const routes = createRoutesFromElements(
           key={route.key + index}
           path={route.path}
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              {route.element}
-            </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
           }
         />
       ))}

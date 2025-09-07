@@ -12,14 +12,14 @@ const useValidationErrors = () => {
           console.error("An unknown error occurred:", error);
           return;
         }
-
+        
         // auth error
         if(validationErrors?.response?.data.error.code === "ERR_AUTH"){
             toast.error(validationErrors.response.data.error.message)
         } 
 
         // validation error
-        if(validationErrors?.response?.data.error.code === "ERR_VALIDATION" && validationErrors?.response?.data.error.errors.length > 0){
+        if(validationErrors?.response?.data.error.code === "ERR_VALIDATION" ){
             const firstErrorMessage = validationErrors.response.data.error.errors[0].message;
             toast.error(firstErrorMessage);
         }

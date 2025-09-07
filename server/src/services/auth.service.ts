@@ -24,7 +24,7 @@ class AuthService {
 
         if(!isPasswordMatch) {
             const error = new AuthenticationError({
-                code: "ERR_VALIDATION",
+                code: "ERR_AUTH",
                 message: "Invalid credentials",
                 statusCode: 401
             });

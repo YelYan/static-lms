@@ -14,13 +14,13 @@ export const login = asyncErrorWrapper(async (req : Request, res : Response) => 
     }
 
     res.cookie("token", result.token , cookieOptions);
-    res.status(200).json({ userId: result.userId });
+    res.status(200).json({ userId: result.userId , message : "Logged in successfully" });
 });
 
 export const register = asyncErrorWrapper(async (req :Request, res : Response) => {
     const userData = req.body as IUser;
     const newUser = await authService.register(userData);
-    res.status(201).json(newUser);
+    res.status(201).json({user : newUser , message : "Register successfully"});
 })
 
 export const logout = asyncErrorWrapper((req, res) => {
