@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { ErrorResponse } from "@/types/api.type";
 import useValidationErrors from "@/shared/hooks/useValidationErrors";
 import toast from "react-hot-toast";
-import { loginSchema } from "@/types/schemas.type";
+import { forgotpasswordSchema } from "@/types/schemas.type";
 import AuthForm from "../components/AuthForm";
 import { forgotPasswordformControls } from "@/shared/constants";
 
@@ -30,10 +30,10 @@ const ForgotPassword = () => {
         type="forgot"
         onSubmit={onSubmit}
         formControls={forgotPasswordformControls}
-        formSchemas={loginSchema}
+        formSchemas={forgotpasswordSchema}
         isPending={mutation.isPending}
         isSuccess={mutation.isSuccess}
-        formValues={{ email: "", password: "" }}
+        formValues={{ email: "" }}
       />
     </div>
   );

@@ -12,23 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import LoadingSpinner from "@/shared/common/loading/LoadingSpinner";
-import { registerformControls } from "@/shared/constants";
 import useRenderFormErrors from "@/shared/hooks/useRenderFormErrors";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, registerSchema } from "@/types/schemas.type";
-import { useEffect } from "react";
-
-type AuthType = "login" | "register" | "forgot" | "reset";
-
-type AuthFormProps = {
-  isSuccess?: boolean;
-  type?: AuthType;
-  onSubmit: (data: unknown) => void;
-  formControls: typeof registerformControls;
-  formValues: Record<string, unknown>;
-  formSchemas: typeof loginSchema | typeof registerSchema;
-  isPending?: boolean;
-};
+import type { AuthFormPropsT, AuthType } from "@/types/schemas.type";
+import { useEffect, useState } from "react";
 
 const AuthForm = ({
   type,
@@ -38,25 +25,46 @@ const AuthForm = ({
   formValues,
   formSchemas,
   isPending = false,
-}: AuthFormProps) => {
+}: AuthFormPropsT) => {
   const {
     control,
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(formSchemas),
     defaultValues: formValues,
   });
 
-  // Call the hook at the top level and get the error rendering function
   const { renderFormErrors } = useRenderFormErrors();
   const { title, description, actionText, actionLink } = getAuthFormText(
     type as AuthType
   );
 
-  // 🔹 Centralized function for text based on auth type
+  // 🔹 Watch password fields
+  const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
+  const [passwordMatchError, setPasswordMatchError] = useState("");
+
+  useEffect(() => {
+    if (type === "reset" && confirmPassword) {
+      if (password !== confirmPassword) {
+        setPasswordMatchError("Passwords do not match");
+      } else {
+        setPasswordMatchError("");
+      }
+    }
+  }, [password, confirmPassword, type]);
+
+  // 🔹 Reset confirmPassword when password changes
+  useEffect(() => {
+    if (type === "reset") {
+      setValue("confirmPassword", "");
+    }
+  }, [password, type, setValue]);
+
   function getAuthFormText(type: AuthType) {
     switch (type) {
       case "login":
@@ -104,6 +112,10 @@ const AuthForm = ({
     }
   }, [isSuccess, reset]);
 
+  // 🔹 Disable submit when password mismatch in reset mode
+  const isSubmitDisabled =
+    isSubmitting || isPending || (type === "reset" && !!passwordMatchError);
+
   return (
     <Card className="w-full max-w-sm mx-auto">
       <CardHeader>
@@ -149,6 +161,14 @@ const AuthForm = ({
                           renderFormErrors(
                             errors[formControl.name]?.message as string
                           )}
+                        {/* 🔹 Live password error */}
+                        {type === "reset" &&
+                          formControl.name === "confirmPassword" &&
+                          passwordMatchError && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {passwordMatchError}
+                            </p>
+                          )}
                       </div>
                     )}
                   />
@@ -167,7 +187,7 @@ const AuthForm = ({
           <Button
             className="bg-blue-300 cursor-pointer relative w-full"
             type="submit"
-            disabled={isSubmitting || isPending}
+            disabled={isSubmitDisabled}
           >
             {isSubmitting || isPending ? <LoadingSpinner /> : "Submit"}
           </Button>

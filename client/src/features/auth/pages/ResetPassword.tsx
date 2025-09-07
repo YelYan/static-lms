@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { ErrorResponse } from "@/types/api.type";
 import useValidationErrors from "@/shared/hooks/useValidationErrors";
 import toast from "react-hot-toast";
-import { loginSchema } from "@/types/schemas.type";
+import { resetPasswordSchema } from "@/types/schemas.type";
 import AuthForm from "../components/AuthForm";
 import { resetPasswordFormControls } from "@/shared/constants";
 
@@ -30,10 +30,10 @@ const ResetPassword = () => {
         type="reset"
         onSubmit={onSubmit}
         formControls={resetPasswordFormControls}
-        formSchemas={loginSchema}
+        formSchemas={resetPasswordSchema}
         isPending={mutation.isPending}
         isSuccess={mutation.isSuccess}
-        formValues={{ newPassword: "", password: "" }}
+        formValues={{ confirmPassword: "", password: "" }}
       />
     </div>
   );
