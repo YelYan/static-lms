@@ -36,3 +36,12 @@ export const forgotPassword = asyncErrorWrapper(async (req : Request, res : Resp
         message: "If your email exists in our system, you'll receive a reset link shortly",
     });
 })
+
+export const resetPassword = asyncErrorWrapper(async (req : Request, res : Response) => {
+    const {password , resetToken} = req.body as {password : string , resetToken : string};
+    const result = await authService.resetPassword(password , resetToken);
+    res.status(200).json({
+        success: true,
+        message: result.message,
+    });
+})

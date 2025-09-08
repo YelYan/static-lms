@@ -4,42 +4,45 @@ import User from "#models/user.model.js";
 import { IUser } from "#models/user.model.js";
 import { forgotPasswordMessgae , sendEmail} from "#utils/utils.js";
 import bcrypt from "bcryptjs";
+import crypto from "crypto"
 import jwt from "jsonwebtoken";
 
 class AuthService {
+
         public async forgotPassword(email: string) {
-        if (!email) {
-            throw new AuthenticationError({
-            code: "ERR_AUTH",
-            message: "Please enter your email",
-            statusCode: 400,
-            });
-        }
-
-        const existingUser = await User.findOne({ email });
-
-        // Always return a generic response (don't leak if email exists)
-        if (!existingUser) {
-            return { sent: true }; // Pretend email was sent
-        }
-
-        // Generate reset token
-        const payload = { userId: existingUser._id, email: existingUser.email };
-        const resetToken = jwt.sign(payload, config.appSecret, { expiresIn: "15m" });
-
-        // Reset URL
-        const resetUrl = `${config.FRONTEND_URL}/reset-password/${existingUser._id as string}/${resetToken}`;
-        const message = forgotPasswordMessgae(resetUrl, existingUser.name);
-
-        // Send email
-        await sendEmail({
-            to: existingUser.email,
-            subject: "Password Reset Request",
-            text: message,
+    if (!email) {
+        throw new AuthenticationError({
+        code: "ERR_AUTH",
+        message: "Please enter your email",
+        statusCode: 400,
         });
+    }
 
-        return { sent: true };
-        }
+    const existingUser = await User.findOne({ email });
+
+    // Always return a generic response (don't leak if email exists)
+    if (!existingUser) {
+        return { sent: true }; // Pretend email was sent
+    }
+
+    // Generate reset token & save hashed token
+    const resetToken = existingUser.getResetPassword();
+    await existingUser.save({validateBeforeSave : false})
+
+
+    // Reset URL
+    const resetUrl = `${config.FRONTEND_URL}/reset-password/${existingUser._id as string}/${resetToken}`;
+    const message = forgotPasswordMessgae(resetUrl, existingUser.name);
+
+    // Send email
+    await sendEmail({
+        to: existingUser.email,
+        subject: "Password Reset Request",
+        text: message,
+    });
+
+    return { sent: true };
+    }
 
 
     public async login (userData : IUser) {
@@ -74,7 +77,6 @@ class AuthService {
         return { token , userId: existingUser._id };
     }
 
-
     public async register (userData : IUser) {
         //1. business logic: check user already exist or not
         const existingUser = await User.findOne({ email: userData.email })
@@ -96,7 +98,38 @@ class AuthService {
         return newUser
     }
 
+    public async resetPassword( newPassword : string , resetToken : string) {
+        if(!newPassword || !resetToken) {
+           throw new AuthenticationError({
+                code : "ERR_AUTH",
+                message : "Invalid Request",
+                statusCode: 400,
+            })
+        }
 
+        const resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+ 
+        const user = await User.findOne({
+                resetPasswordToken: resetPasswordToken,
+                resetPasswordExpire: { $gt: new Date() }, // check if not expired
+        })
+
+        if (!user) {
+            throw new AuthenticationError({
+            code: "ERR_AUTH",
+            message: "Invalid or expired token",
+            statusCode: 400,
+        });
+        }
+
+        user.password = newPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire  = undefined;
+        await user.save();
+
+        return { message: "Password reset successful" };
+    }
 }
 
 export default new AuthService();

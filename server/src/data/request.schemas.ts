@@ -77,6 +77,31 @@ export const forgotPassSchemaValidate = Joi.object({
   })
 })
 
+export const resetPasswordSchemaValidate = Joi.object({
+    password: Joi.string()
+  .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+  .min(6)
+  .max(25)
+  .required()
+  .messages({
+    "string.base": "Password must be a string.",
+    "string.empty": "Password cannot be empty.",
+    "string.min": "Password must be at least 6 characters long.",
+    "string.max": "Password cannot exceed 25 characters.",
+    "string.pattern.base": "Password must contain only letters and numbers.",
+    "any.required": "Password is required."
+  }),
+  resetToken: Joi.string()
+    .min(3)
+    .required()
+    .messages({
+    "string.base": "Reset Token must be a string.",
+    "string.empty": "Reset Token cannot be empty.",
+    "string.min": "Reset Token must be at least 1 character long.",
+    "any.required": "Reset Token is required.",
+  }), 
+})
+
 
 export const productSchemaValidate = Joi.object({
   name: Joi.string()
