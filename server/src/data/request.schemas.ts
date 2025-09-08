@@ -65,6 +65,19 @@ export const loginSchemaValidate = Joi.object({
   })
 })
 
+export const forgotPassSchemaValidate = Joi.object({
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }) // Validate email format
+    .required() 
+    .messages({
+    "string.base": "Email must be a string.",
+    "string.empty": "Email cannot be empty.",
+    "string.email": "Please provide a valid email address.",
+    "any.required": "Email is required."
+  })
+})
+
+
 export const productSchemaValidate = Joi.object({
   name: Joi.string()
     .min(3)

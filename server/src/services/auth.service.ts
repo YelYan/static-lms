@@ -2,38 +2,45 @@ import config from "#config/config.js";
 import AuthenticationError from "#errors/AuthenticationError.js";
 import User from "#models/user.model.js";
 import { IUser } from "#models/user.model.js";
+import { forgotPasswordMessgae , sendEmail} from "#utils/utils.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 class AuthService {
-    public async forgotPassword (email : string) {
-        if(!email) {
-            const error = new AuthenticationError({
-                code: "ERR_AUTH",
-                message: "Please enter your email",
-                statusCode: 400
+        public async forgotPassword(email: string) {
+        if (!email) {
+            throw new AuthenticationError({
+            code: "ERR_AUTH",
+            message: "Please enter your email",
+            statusCode: 400,
             });
-            throw error
         }
 
-        const existingUser = await User.findOne({email})
+        const existingUser = await User.findOne({ email });
 
-        if(!existingUser) {
-            const error = new AuthenticationError({
-                code: "ERR_AUTH",
-                message: "No email could not be send",
-                statusCode: 404
-            });
-            throw error
+        // Always return a generic response (don't leak if email exists)
+        if (!existingUser) {
+            return { sent: true }; // Pretend email was sent
         }
 
-        const payload = {userId : existingUser._id , email : existingUser.email};
-        const resetToken = jwt.sign(payload, config.appSecret as unknown as string, {expiresIn: '15m'});
+        // Generate reset token
+        const payload = { userId: existingUser._id, email: existingUser.email };
+        const resetToken = jwt.sign(payload, config.appSecret, { expiresIn: "15m" });
 
-        const resetLink = `${config.FRONTEND_URL}/reset-password/${existingUser._id as string}/${resetToken}`;
-        
+        // Reset URL
+        const resetUrl = `${config.FRONTEND_URL}/reset-password/${existingUser._id as string}/${resetToken}`;
+        const message = forgotPasswordMessgae(resetUrl, existingUser.name);
 
-    }
+        // Send email
+        await sendEmail({
+            to: existingUser.email,
+            subject: "Password Reset Request",
+            text: message,
+        });
+
+        return { sent: true };
+        }
+
 
     public async login (userData : IUser) {
         //1. business logic: check user already exist or not

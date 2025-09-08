@@ -14,21 +14,25 @@ export const login = asyncErrorWrapper(async (req : Request, res : Response) => 
     }
 
     res.cookie("token", result.token , cookieOptions);
-    res.status(200).json({ userId: result.userId , message : "Logged in successfully" });
+    res.status(200).json({success : true, userId: result.userId , message : "Logged in successfully" });
 });
 
 export const register = asyncErrorWrapper(async (req :Request, res : Response) => {
     const userData = req.body as IUser;
     const newUser = await authService.register(userData);
-    res.status(201).json({user : newUser , message : "Register successfully"});
+    res.status(201).json({ success : true, user : newUser , message : "Register successfully"});
 })
 
 export const logout = asyncErrorWrapper((req, res) => {
     res.cookie("token", "", { maxAge: 0 , expires: new Date(0)});
-    res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({ success : true, message: "Logged out successfully" });
 });
 
 export const forgotPassword = asyncErrorWrapper(async (req : Request, res : Response) => {
     const {email} = req.body as {email : string};
-    const result = await authService.forgotPassword(email);
+    await authService.forgotPassword(email);
+    res.status(200).json({
+        success: true,
+        message: "If your email exists in our system, you'll receive a reset link shortly",
+    });
 })

@@ -9,6 +9,11 @@ const config = {
     level : process.env.LOG_LEVEL ?? "info",
     appSecret: process.env.APP_SECRET ?? "",
     FRONTEND_URL : process.env.FRONTEND_URL ?? "http://localhost:5173",
+    
+    SMTP_SERVER : process.env.SMTP_SERVER ?? "",
+    SMTP_PORT : process.env.SMTP_PORT ?? 587,
+    SMTP_USER : process.env.SMTP_USER ?? "",
+    SMTP_KEY : process.env.SMTP_KEY ?? "",
 }
 
 // allow the frontend to make requests to your API
