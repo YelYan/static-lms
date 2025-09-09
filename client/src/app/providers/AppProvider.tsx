@@ -1,10 +1,10 @@
 import { QueryProviders } from "./QueryProviders";
-import ReduxProvider from "./ReduxProvides";
+import { AuthProvider } from "./AuthProvider";
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryProviders>
-      <ReduxProvider>{children}</ReduxProvider>
+      <AuthProvider>{children}</AuthProvider>
     </QueryProviders>
   );
 };

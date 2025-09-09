@@ -4,7 +4,7 @@ import {
   LazyDashboard,
   LazyDashboardProject,
 } from "../lazy";
-import type { RoutesT } from "../route.type";
+import type { RoutesT } from "../../../types/route.type";
 export const allPrivateRoutes: RoutesT = [
   {
     key: "about",

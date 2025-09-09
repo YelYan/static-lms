@@ -1,4 +1,4 @@
-import type { RoutesT } from "../route.type";
+import type { RoutesT } from "../../../types/route.type";
 import {
   LazyLogin,
   LazyRegister,

@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 
 class AuthService {
 
-        public async forgotPassword(email: string) {
+    public async forgotPassword(email: string) {
     if (!email) {
         throw new AuthenticationError({
         code: "ERR_AUTH",
@@ -28,7 +28,6 @@ class AuthService {
     // Generate reset token & save hashed token
     const resetToken = existingUser.getResetPassword();
     await existingUser.save({validateBeforeSave : false})
-
 
     // Reset URL
     const resetUrl = `${config.FRONTEND_URL}/reset-password/${existingUser._id as string}/${resetToken}`;

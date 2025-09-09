@@ -1,27 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { fetchLogout } from "@/services/auth/auth-api-client";
-import { useMutation } from "@tanstack/react-query";
-import useValidationErrors from "@/shared/hooks/useValidationErrors";
-import { AxiosError } from "axios";
-import type { ErrorResponse } from "@/types/api.type";
-import toast from "react-hot-toast";
+import { useLogout } from "@/services/auth/auth-api-client";
 
 const Header = () => {
-  const { showValidationError } = useValidationErrors();
-  const mutation = useMutation({
-    mutationFn: fetchLogout,
-    onSuccess: (data) => {
-      toast.success(data.message);
-    },
-    onError: (error) => {
-      showValidationError(error as AxiosError<ErrorResponse>);
-    },
-  });
+  const logoutMutation = useLogout();
   return (
     <div>
       <Button
         className="bg-red-500 text-white cursor-pointer"
-        onClick={() => mutation.mutate()}
+        onClick={() => logoutMutation.mutate()}
       >
         Log Out
       </Button>

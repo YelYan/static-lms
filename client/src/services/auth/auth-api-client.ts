@@ -1,5 +1,12 @@
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { useNavigate , useLocation } from "react-router";
+import { useMutation , useQuery, useQueryClient} from "@tanstack/react-query";
 import apiClient from "../api-client";
+import type { ErrorResponse } from "@/types/api.type";
+import useValidationErrors from "@/shared/hooks/useValidationErrors";
 
+/*---------------- api fetch ------------------*/ 
 export const fetchLogin = async (formdata: unknown) => {
         const response = await apiClient.post("/auth/login", formdata);
         if(!response.data) {
@@ -10,7 +17,7 @@ export const fetchLogin = async (formdata: unknown) => {
 export const fetchRegister = async (formdata: unknown) => {
         const response = await apiClient.post("/auth/register", formdata);
         if(!response.data) {
-            throw new Error("Registration failed");
+            throw new Error("Registration failed"); 
         }
         return response.data;
 }
@@ -18,20 +25,134 @@ export const fetchLogout = async () => {
         const response = await apiClient.post("/auth/logout");
         if(!response.data) {
             throw new Error("Logout failed");
-        }
+        } 
         return response.data;
 }
-export const fetchForgotPassword = async (formdata: unknown) => {
+export const fetchForgotPassword = async (formdata: {email : string}) => {
         const response = await apiClient.post("/auth/forgot-password", formdata);
         if(!response.data) {
             throw new Error("Login failed");
         }
         return response.data;
 }
-export const fetchResetPassword = async (formdata: unknown) => {
+export const fetchResetPassword = async (formdata: {password : string; resetToken : string}) => {
         const response = await apiClient.post("/auth/reset-password", formdata);
         if(!response.data) {
             throw new Error("Login failed");
         }
         return response.data;
+}
+export const fetchvalidateToken = async () => {
+        const response = await apiClient.get("/auth/validate-token");
+        if(!response.data) {
+            throw new Error("Token Validation failed");
+        }
+        return response.data;
+}
+
+/*---------------- api hooks ------------------*/ 
+export const useUser = () => {
+return useQuery({
+    queryKey : ["user"],
+    queryFn : fetchvalidateToken,
+    retry : false, // don't retry if unauthorized
+})
+}
+
+export const useLogin = () => {
+    const location = useLocation();
+    const navigate = useNavigate()
+    const queryClient = useQueryClient();
+    const { showValidationError } = useValidationErrors();
+
+    const from = (location.state as { from?: Location })?.from?.pathname || "/";
+
+    return useMutation({
+        mutationFn : fetchLogin,
+        onSuccess: (data) => {
+            toast.success(data.message);
+            // Refresh user data after login
+            queryClient.invalidateQueries({ queryKey: ["user"] });
+
+            if(data.success){
+                navigate(from, {replace : true})
+            }
+        },
+        onError: (error) => {
+              showValidationError(error as AxiosError<ErrorResponse>);
+        },
+    })
+
+}
+
+export const useRegister = () => {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const { showValidationError } = useValidationErrors();
+
+    return useMutation({
+        mutationFn : fetchRegister,
+        onSuccess: (data) => {
+            toast.success(data.message);
+            if(data.success) {
+                navigate("/login")
+            }
+            // Refresh user data after login
+            queryClient.invalidateQueries({ queryKey: ["user"] });
+        },
+        onError: (error) => {
+              showValidationError(error as AxiosError<ErrorResponse>);
+        },
+    })
+}
+
+export const useForgotPassword = () => {
+    const { showValidationError } = useValidationErrors();
+
+    return useMutation({
+        mutationFn : fetchForgotPassword,
+        onSuccess: (data) => {
+            toast.success(data.message);
+        },
+        onError: (error) => {
+              showValidationError(error as AxiosError<ErrorResponse>);
+        },
+    })
+
+}
+export const useResetPassword = () => {
+    const { showValidationError } = useValidationErrors();
+
+    return useMutation({
+        mutationFn : fetchResetPassword,
+        onSuccess: (data) => {
+            toast.success(data.message);
+        },
+        onError: (error) => {
+              showValidationError(error as AxiosError<ErrorResponse>);
+        },
+    })
+
+}
+
+export const useLogout = () => {
+    const navigate = useNavigate()
+    const { showValidationError } = useValidationErrors();
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn : fetchLogout,
+        onSuccess: (data) => {
+            toast.success(data.message);
+            queryClient.setQueryData(["user"], null); 
+            if(data.success){
+                // clear user cache
+                navigate("/login")
+            }
+        },
+        onError: (error) => {
+              showValidationError(error as AxiosError<ErrorResponse>);
+        },
+    })
+
 }

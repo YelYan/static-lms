@@ -7,8 +7,9 @@ import {
   createRoutesFromElements,
 } from "react-router";
 import Layout from "@/shared/layouts/Layout";
-import { LazyHome } from "./routes/lazy";
-import { privateRoutes, publicRoutes } from "./routes";
+import { LazyHome } from "@/app/routes/lazy";
+import { privateRoutes, publicRoutes } from "@/app/routes";
+import AuthGuard from "@/app/routes/guard/AuthGuard";
 import NotFound from "@/features/NotFound/NotFound";
 import { LoadingSpinner } from "@/shared/common";
 
@@ -31,7 +32,9 @@ const routes = createRoutesFromElements(
           key={route.key + index}
           path={route.path}
           element={
-            <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
+            <AuthGuard>
+              <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
+            </AuthGuard>
           }
         />
       ))}

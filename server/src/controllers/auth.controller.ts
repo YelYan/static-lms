@@ -45,3 +45,8 @@ export const resetPassword = asyncErrorWrapper(async (req : Request, res : Respo
         message: result.message,
     });
 })
+
+export const verifyToken = asyncErrorWrapper((req : Request , res : Response) => {
+    const {userId , email} = req.auth?.payload as {email : string; userId : string}
+    res.json({ userId , email })  
+})

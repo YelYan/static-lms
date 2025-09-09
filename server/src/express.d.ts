@@ -5,9 +5,9 @@ declare global {
   namespace Express {
     interface Request {
       auth?: {
-        payload: JwtPayload;
+        payload: JwtPayload & {email : string ; userId : string};
         token: string;
-      };
+      };  
       cookies: Record<string, string> & {
         auth_token?: string;
       };
