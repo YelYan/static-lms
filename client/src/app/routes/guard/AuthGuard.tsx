@@ -3,7 +3,9 @@ import { useAuth } from "@/shared/hooks/useAuth";
 import type { JSX } from "react";
 import { LoadingSpinner } from "@/shared/common";
 
-const AuthGuard = ({ children }: { children: JSX.Element }) => {
+type AuthGuardpropsT = { children: JSX.Element; allowedRoles?: string[] };
+
+const AuthGuard = ({ children, allowedRoles }: AuthGuardpropsT) => {
   const { user, isLoading, isLoggedIn } = useAuth();
   const location = useLocation();
 
@@ -16,6 +18,12 @@ const AuthGuard = ({ children }: { children: JSX.Element }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  // Role-based protection
+  if (allowedRoles && user && !allowedRoles.includes(user?.role)) {
+    return <Navigate to="/" replace />;
+  }
+
+  // Allow access
   return children;
 };
 

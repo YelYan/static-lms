@@ -33,6 +33,7 @@ const authenticateUser = (req :Request, res :Response, next:NextFunction) => {
         const decoded = jwt.verify(token, config.appSecret);
         req.auth = {payload : decoded as JwtPayload & {
             email : string;
+            role : string;
             userId : string;
         }, token }
         next()

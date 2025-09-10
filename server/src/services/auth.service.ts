@@ -70,10 +70,10 @@ class AuthService {
         }
 
         // 3. Other actions: Generate JWT token
-        const payload = {userId : existingUser._id , email : existingUser.email};
+        const payload = {userId : existingUser._id , email : existingUser.email , role : existingUser.role};
         const token = jwt.sign(payload, config.appSecret as unknown as string, {expiresIn: '1d'});
 
-        return { token , userId: existingUser._id };
+        return { token , userId: existingUser._id , role : existingUser.role};
     }
 
     public async register (userData : IUser) {

@@ -10,6 +10,7 @@ export interface IUser extends Document {
     password : string;
     resetPasswordExpire?: Date;
     resetPasswordToken?: string;
+    role? : string
 }
 
 const userSchema = new Schema({
@@ -27,6 +28,11 @@ const userSchema = new Schema({
         select : false,
         type: String, 
     },
+    role : {
+        type : String,
+        enum : ["admin" , "editor" , "user"],
+        default : "user",
+    }
 },   { timestamps: true });
 
 userSchema.pre("save", async function (this: IUser, next) {

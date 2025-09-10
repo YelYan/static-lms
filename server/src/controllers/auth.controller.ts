@@ -47,6 +47,6 @@ export const resetPassword = asyncErrorWrapper(async (req : Request, res : Respo
 })
 
 export const verifyToken = asyncErrorWrapper((req : Request , res : Response) => {
-    const {userId , email} = req.auth?.payload as {email : string; userId : string}
-    res.json({ userId , email })  
+    const {userId , email , role} = req.auth?.payload as Record<"email" | "role"  | "userId" , string>
+    res.json({ userId , email , role })  
 })

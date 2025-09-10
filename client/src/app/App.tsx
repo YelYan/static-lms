@@ -65,7 +65,7 @@ const routes = createRoutesFromElements(
           key={route.key + index}
           path={route.path}
           element={
-            <AuthGuard>
+            <AuthGuard allowedRoles={["admin"]}>
               <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
             </AuthGuard>
           }

@@ -1,10 +1,10 @@
 import React, { createContext } from "react";
 import { useUser } from "@/services/auth/auth-api-client";
 
-type UserT = Record<"userId" | "email", string>;
+type UserT = Record<"userId" | "email" | "role", string>;
 
 type AuthContextT = {
-  user: UserT | unknown;
+  user: UserT;
   isLoggedIn: boolean;
   isLoading: boolean;
 };
