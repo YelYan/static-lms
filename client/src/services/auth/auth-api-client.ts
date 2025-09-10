@@ -4,7 +4,7 @@ import { useNavigate , useLocation } from "react-router";
 import { useMutation , useQuery, useQueryClient} from "@tanstack/react-query";
 import apiClient from "../api-client";
 import type { ErrorResponse } from "@/types/api.type";
-import useValidationErrors from "@/shared/hooks/useValidationErrors";
+import { showValidationError } from "@/lib/showValidationErrors";
 
 /*---------------- api fetch ------------------*/ 
 export const fetchLogin = async (formdata: unknown) => {
@@ -63,30 +63,28 @@ export const useLogin = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const queryClient = useQueryClient();
-    const { showValidationError } = useValidationErrors();
 
     const from = (location.state as { from?: Location })?.from?.pathname || "/";
 
     return useMutation({
         mutationFn : fetchLogin,
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             toast.success(data.message);
-            // Refresh user data after login
-            queryClient.invalidateQueries({ queryKey: ["user"] });
+            // Wait for the 'user' query to be refetched and settled.
+            await queryClient.refetchQueries({ queryKey: ["user"] });
             navigate(from, {replace : true})
-            
+            // Refresh user data after login
+            // queryClient.invalidateQueries({ queryKey: ["user"]});
         },
-        onError: (error) => {
-              showValidationError(error as AxiosError<ErrorResponse>);
+        onError: (error : AxiosError<ErrorResponse>) => {
+           showValidationError(error)
         },
     })
-
 }
 
 export const useRegister = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const { showValidationError } = useValidationErrors();
 
     return useMutation({
         mutationFn : fetchRegister,
@@ -99,29 +97,25 @@ export const useRegister = () => {
             queryClient.invalidateQueries({ queryKey: ["user"] });
         },
         onError: (error) => {
-              showValidationError(error as AxiosError<ErrorResponse>);
+              showValidationError(error);
         },
     })
 }
 
 export const useForgotPassword = () => {
-    const { showValidationError } = useValidationErrors();
-
     return useMutation({
         mutationFn : fetchForgotPassword,
         onSuccess: (data) => {
             toast.success(data.message);
         },
         onError: (error) => {
-              showValidationError(error as AxiosError<ErrorResponse>);
+              showValidationError(error);
         },
     })
 
 }
 export const useResetPassword = () => {
     const navigate = useNavigate()
-    const { showValidationError } = useValidationErrors();
-
     return useMutation({
         mutationFn : fetchResetPassword,
         onSuccess: (data) => {
@@ -129,7 +123,7 @@ export const useResetPassword = () => {
             if(data.success) navigate("/login")
         },
         onError: (error) => {
-              showValidationError(error as AxiosError<ErrorResponse>);
+              showValidationError(error);
         },
     })
 
@@ -137,7 +131,6 @@ export const useResetPassword = () => {
 
 export const useLogout = () => {
     const navigate = useNavigate()
-    const { showValidationError } = useValidationErrors();
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -151,7 +144,7 @@ export const useLogout = () => {
             }
         },
         onError: (error) => {
-              showValidationError(error as AxiosError<ErrorResponse>);
+              showValidationError(error);
         },
     })
 

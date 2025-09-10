@@ -1,9 +1,4 @@
-import {
-  LazyAbout,
-  LazyContact,
-  LazyDashboard,
-  LazyDashboardProject,
-} from "../lazy";
+import { LazyAbout, LazyContact } from "../lazy";
 import type { RoutesT } from "../../../types/route.type";
 export const allPrivateRoutes: RoutesT = [
   {
@@ -15,21 +10,6 @@ export const allPrivateRoutes: RoutesT = [
     key: "contact",
     path: "/contact",
     element: <LazyContact />,
-  },
-  {
-    key: "dashboard",
-    path: "/dashboard",
-    element: <LazyDashboard />,
-  },
-  {
-    key: "dashboard",
-    path: "/dashboard",
-    element: <LazyDashboard />,
-  },
-  {
-    key: "dashboard-project",
-    path: "/dashboard/project",
-    element: <LazyDashboardProject />,
   },
 ];
 

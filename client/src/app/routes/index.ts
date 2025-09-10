@@ -1,3 +1,3 @@
-import { privateRoutes, publicRoutes } from "./routes.config";
+import { privateRoutes, publicRoutes , allAdminRoutes } from "./routes.config";
 
-export { privateRoutes, publicRoutes };
+export { privateRoutes, publicRoutes, allAdminRoutes };

@@ -7,27 +7,60 @@ import {
   createRoutesFromElements,
 } from "react-router";
 import Layout from "@/shared/layouts/Layout";
+import DashboardLayout from "@/shared/layouts/DashboardLayout";
 import { LazyHome } from "@/app/routes/lazy";
-import { privateRoutes, publicRoutes } from "@/app/routes";
+import { privateRoutes, publicRoutes, allAdminRoutes } from "@/app/routes";
 import AuthGuard from "@/app/routes/guard/AuthGuard";
 import NotFound from "@/features/NotFound/NotFound";
 import { LoadingSpinner } from "@/shared/common";
 
 const routes = createRoutesFromElements(
-  <Route element={<Layout />}>
-    <Route
-      index
-      path="/"
-      element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <LazyHome />
-        </Suspense>
-      }
-    />
+  <Route>
+    <Route element={<Layout />}>
+      <Route
+        index
+        path="/"
+        element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <LazyHome />
+          </Suspense>
+        }
+      />
 
-    {/* Private routes */}
-    <Route>
-      {privateRoutes.map((route, index: number) => (
+      {/* Private routes */}
+      <Route>
+        {privateRoutes.map((route, index: number) => (
+          <Route
+            key={route.key + index}
+            path={route.path}
+            element={
+              <AuthGuard>
+                <Suspense fallback={<LoadingSpinner />}>
+                  {route.element}
+                </Suspense>
+              </AuthGuard>
+            }
+          />
+        ))}
+      </Route>
+
+      {/* Public routes */}
+      <Route>
+        {publicRoutes.map((route, index: number) => (
+          <Route
+            key={route.key + index}
+            path={route.path}
+            element={
+              <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
+            }
+          />
+        ))}
+      </Route>
+    </Route>
+
+    {/* Admin routes */}
+    <Route element={<DashboardLayout />}>
+      {allAdminRoutes.map((route, index: number) => (
         <Route
           key={route.key + index}
           path={route.path}
@@ -35,19 +68,6 @@ const routes = createRoutesFromElements(
             <AuthGuard>
               <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
             </AuthGuard>
-          }
-        />
-      ))}
-    </Route>
-
-    {/* Public routes */}
-    <Route>
-      {publicRoutes.map((route, index: number) => (
-        <Route
-          key={route.key + index}
-          path={route.path}
-          element={
-            <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
           }
         />
       ))}
