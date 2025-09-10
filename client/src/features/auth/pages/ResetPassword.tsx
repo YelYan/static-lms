@@ -1,28 +1,23 @@
-import { AxiosError } from "axios";
-import { fetchLogin } from "@/services/auth/auth-api-client";
-import { useMutation } from "@tanstack/react-query";
-import type { ErrorResponse } from "@/types/api.type";
-import useValidationErrors from "@/shared/hooks/useValidationErrors";
-import toast from "react-hot-toast";
+import { useLocation } from "react-router";
 import { resetPasswordSchema } from "@/types/schemas.type";
 import AuthForm from "../components/AuthForm";
 import { resetPasswordFormControls } from "@/shared/constants";
+import { useResetPassword } from "@/services/auth/auth-api-client";
+
+type ResetPasswordFormDataT = Record<"confirmPassword" | "password", string>;
 
 const ResetPassword = () => {
-  const { showValidationError } = useValidationErrors();
+  const location = useLocation();
+  const resetpasswordMutation = useResetPassword();
+  const pathSegments = location.pathname.split("/"); // split the URL by "/"
+  const resetToken = pathSegments[pathSegments.length - 1]; // last segment
 
-  const mutation = useMutation({
-    mutationFn: fetchLogin,
-    onSuccess: (data) => {
-      toast.success(data.message);
-    },
-    onError: (error) => {
-      showValidationError(error as AxiosError<ErrorResponse>);
-    },
-  });
-
-  const onSubmit = (data: unknown) => {
-    mutation.mutate(data);
+  const onSubmit = (data: ResetPasswordFormDataT | unknown) => {
+    const formData = data as ResetPasswordFormDataT;
+    resetpasswordMutation.mutate({
+      resetToken,
+      password: formData.password,
+    });
   };
   return (
     <div>
@@ -31,8 +26,8 @@ const ResetPassword = () => {
         onSubmit={onSubmit}
         formControls={resetPasswordFormControls}
         formSchemas={resetPasswordSchema}
-        isPending={mutation.isPending}
-        isSuccess={mutation.isSuccess}
+        isPending={resetpasswordMutation.isPending}
+        isSuccess={resetpasswordMutation.isSuccess}
         formValues={{ confirmPassword: "", password: "" }}
       />
     </div>

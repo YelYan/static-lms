@@ -28,7 +28,7 @@ export const fetchLogout = async () => {
         } 
         return response.data;
 }
-export const fetchForgotPassword = async (formdata: {email : string}) => {
+export const fetchForgotPassword = async (formdata: {email : string} | unknown) => {
         const response = await apiClient.post("/auth/forgot-password", formdata);
         if(!response.data) {
             throw new Error("Login failed");
@@ -73,10 +73,8 @@ export const useLogin = () => {
             toast.success(data.message);
             // Refresh user data after login
             queryClient.invalidateQueries({ queryKey: ["user"] });
-
-            if(data.success){
-                navigate(from, {replace : true})
-            }
+            navigate(from, {replace : true})
+            
         },
         onError: (error) => {
               showValidationError(error as AxiosError<ErrorResponse>);
@@ -121,12 +119,14 @@ export const useForgotPassword = () => {
 
 }
 export const useResetPassword = () => {
+    const navigate = useNavigate()
     const { showValidationError } = useValidationErrors();
 
     return useMutation({
         mutationFn : fetchResetPassword,
         onSuccess: (data) => {
             toast.success(data.message);
+            if(data.success) navigate("/login")
         },
         onError: (error) => {
               showValidationError(error as AxiosError<ErrorResponse>);

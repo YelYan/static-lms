@@ -4,14 +4,17 @@ import { useLogout } from "@/services/auth/auth-api-client";
 const Header = () => {
   const logoutMutation = useLogout();
   return (
-    <div>
-      <Button
-        className="bg-red-500 text-white cursor-pointer"
-        onClick={() => logoutMutation.mutate()}
-      >
-        Log Out
-      </Button>
-    </div>
+    <header className="py-4 shadow-xs">
+      <nav className="flex items-center justify-between">
+        <h1 className="font-bold text-2xl">LOGO</h1>
+        <Button
+          className="btn btn-primary text-white cursor-pointer"
+          onClick={() => logoutMutation.mutate()}
+        >
+          Log Out
+        </Button>
+      </nav>
+    </header>
   );
 };
 

@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import { Hero, Header, Footer, SearchBar } from "@/shared/common";
 const Layout = () => {
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col px-4">
       <Header />
       <Hero />
       <div className="container mx-auto">
