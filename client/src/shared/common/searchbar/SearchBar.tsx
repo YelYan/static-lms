@@ -1,5 +1,5 @@
 const SearchBar = () => {
-  return <div>SearchBar</div>;
+  return <div>About</div>;
 };
 
 export default SearchBar;

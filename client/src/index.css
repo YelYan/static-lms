@@ -110,6 +110,30 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@font-face {
+  font-family: 'TelegrafBold';
+  font-weight: 700;
+  src: url('/fonts/telegraf-bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'TelegrafRegular';
+  font-weight: 400;
+  src: url('/fonts/telegraf-regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'TelegrafLight';
+  font-weight: 200;
+  src: url('/fonts/telegraf-ultra-light.otf') format('opentype');
+}
+
+@theme {
+  --font-telegraf-bold : TelegrafBold, "sans-serif";
+  --font-telegraf-regular : TelegrafRegular, "sans-serif";
+  --font-telegraf-light : TelegrafLight, "sans-serif";
+
+  --color-main : #033ADF;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
