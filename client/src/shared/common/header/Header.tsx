@@ -1,23 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { useLogout } from "@/services/auth/auth-api-client";
-import { useAuth } from "@/shared/hooks/useAuth";
+import { Link } from "react-router";
 
 const Header = () => {
-  const { isLoggedIn } = useAuth();
-  const logoutMutation = useLogout();
   return (
-    <header className="py-4 shadow-xs">
-      <nav className="flex items-center justify-between">
-        <h1 className="font-bold text-2xl">LOGO</h1>
+    <header className="container">
+      <nav className=" border-b-2 border-red-400 flex items-center justify-between py-4 ">
+        <Link to="/">
+          <h1 className="font-bold text-2xl">LOGO</h1>
+        </Link>
 
-        {isLoggedIn && (
-          <Button
-            className="btn btn-primary text-white cursor-pointer"
-            onClick={() => logoutMutation.mutate()}
-          >
-            Log Out
-          </Button>
-        )}
+        <ul className="flex items-center gap-4">
+          <li>COURSES</li>
+          <li>FAQ</li>
+          <li>ABOUT</li>
+        </ul>
       </nav>
     </header>
   );
