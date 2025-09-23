@@ -38,22 +38,28 @@ const HeaderMobile = () => {
               </SheetClose>
             </div>
             <SheetDescription className="h-full grid place-content-center">
-              <ul className="flex flex-col items-center gap-4 font-telegraf-regular text-white">
+              <ul className="flex flex-col items-center gap-4 font-telegraf-regular text-white font-bold">
                 <li>
                   <a
                     href="#courses"
-                    className="cursor-pointer hover:opacity-50"
+                    className="cursor-pointer hover:opacity-50 tracking-wider"
                   >
                     COURSES
                   </a>
                 </li>
                 <li>
-                  <a href="#FAQ" className="cursor-pointer hover:opacity-50">
+                  <a
+                    href="#FAQ"
+                    className="cursor-pointer hover:opacity-50 tracking-wider"
+                  >
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#ABOUT" className="cursor-pointer hover:opacity-50">
+                  <a
+                    href="#ABOUT"
+                    className="cursor-pointer hover:opacity-50 tracking-wider"
+                  >
                     ABOUT
                   </a>
                 </li>
@@ -73,14 +79,20 @@ const HeaderDesktop = () => {
         <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
       </Link>
 
-      <ul className="flex items-center gap-8 font-telegraf-regular text-white">
+      <ul className="flex items-center gap-8 font-telegraf-regular text-white font-bold">
         <li>
-          <a href="#courses" className="cursor-pointer hover:opacity-50">
+          <a
+            href="#courses"
+            className="cursor-pointer hover:opacity-50 tracking-wider"
+          >
             COURSES
           </a>
         </li>
         <li>
-          <a href="#FAQ" className="cursor-pointer hover:opacity-50">
+          <a
+            href="#FAQ"
+            className="cursor-pointer hover:opacity-50 tracking-wider"
+          >
             FAQ
           </a>
         </li>
