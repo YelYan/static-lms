@@ -14,7 +14,7 @@ import {
 
 const HeaderMobile = () => {
   return (
-    <nav className="flex items-center justify-between py-4">
+    <nav className="flex items-center justify-between py-4 container">
       <Link to="/">
         <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
       </Link>
@@ -22,7 +22,7 @@ const HeaderMobile = () => {
         <SheetTrigger>
           <Menu
             size={"30px"}
-            className="text-white cursor-pointer hover:text-accent"
+            className="text-white cursor-pointer hover:opacity-50"
           />
         </SheetTrigger>
         <SheetContent className="bg-secondary-foreground border-accent-foreground">
@@ -33,8 +33,8 @@ const HeaderMobile = () => {
                   LOGO
                 </h1>
               </SheetTitle>
-              <SheetClose>
-                <X size={"30px"} className="text-white cursor-pointer" />
+              <SheetClose className="cursor-pointer">
+                <X size={"30px"} className="text-white hover:opacity-50" />
               </SheetClose>
             </div>
             <SheetDescription className="h-full grid place-content-center">
@@ -42,18 +42,18 @@ const HeaderMobile = () => {
                 <li>
                   <a
                     href="#courses"
-                    className="cursor-pointer hover:text-accent"
+                    className="cursor-pointer hover:opacity-50"
                   >
                     COURSES
                   </a>
                 </li>
                 <li>
-                  <a href="#FAQ" className="cursor-pointer hover:text-accent">
+                  <a href="#FAQ" className="cursor-pointer hover:opacity-50">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#ABOUT" className="cursor-pointer hover:text-accent">
+                  <a href="#ABOUT" className="cursor-pointer hover:opacity-50">
                     ABOUT
                   </a>
                 </li>
@@ -68,24 +68,24 @@ const HeaderMobile = () => {
 
 const HeaderDesktop = () => {
   return (
-    <nav className="flex items-center justify-between py-4 ">
+    <nav className="flex items-center justify-between py-4 container">
       <Link to="/">
         <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
       </Link>
 
-      <ul className="flex items-center gap-4 font-telegraf-regular text-white">
+      <ul className="flex items-center gap-8 font-telegraf-regular text-white">
         <li>
-          <a href="#courses" className="cursor-pointer hover:text-accent">
+          <a href="#courses" className="cursor-pointer hover:opacity-50">
             COURSES
           </a>
         </li>
         <li>
-          <a href="#FAQ" className="cursor-pointer hover:text-accent">
+          <a href="#FAQ" className="cursor-pointer hover:opacity-50">
             FAQ
           </a>
         </li>
         <li>
-          <a href="#ABOUT" className="cursor-pointer hover:text-accent">
+          <a href="#ABOUT" className="cursor-pointer hover:opacity-50">
             ABOUT
           </a>
         </li>
@@ -99,7 +99,7 @@ const Header = () => {
     useResponsive();
 
   return (
-    <header className="container bg-secondary-foreground">
+    <header className="bg-secondary-foreground py-4">
       {desktopResponsive && <HeaderDesktop />}
       {(mobileResponsive || tabletResponsive) && <HeaderMobile />}
     </header>
