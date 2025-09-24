@@ -160,6 +160,7 @@
 }
 
 body {
+  scroll-behavior: smooth;
   letter-spacing: var(--tracking-normal);
 }
 

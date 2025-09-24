@@ -7,7 +7,7 @@ const AboutHome = () => {
       <div className="container py-20">
         <div className="w-full font-telegraf-bold">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-5xl">WHAT WE TEACH?</h1>
+            <h1 className="text-2xl md:text-7xl">WHAT WE TEACH?</h1>
             <p>LOGO</p>
           </div>
           {/* underline */}
@@ -49,7 +49,7 @@ const AboutHome = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-5xl">OUR ENGINEERING AI</h1>
+            <h1 className="text-2xl md:text-7xl">OUR ENGINEERING AI</h1>
           </div>
           {/* underline */}
           <hr className="h-[3px] w-full bg-foreground my-4" />
