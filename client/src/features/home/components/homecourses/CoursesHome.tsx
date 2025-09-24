@@ -60,7 +60,7 @@ const CoursesHome = () => {
                   <img
                     src={image}
                     alt="courses content"
-                    className="object-cover object-center max-w-full inline-block"
+                    className="object-cover object-center max-w-full inline-block rounded"
                   />
                   <CardTitle>{title}</CardTitle>
                   <CardDescription>{desc}</CardDescription>
@@ -70,7 +70,7 @@ const CoursesHome = () => {
                     <Button
                       type="button"
                       size={"sm"}
-                      className="cursor-pointer border border-primary hover:bg-transparent hover:text-primary"
+                      className="cursor-pointer border border-primary hover:bg-transparent hover:text-primary rounded-3xl"
                     >
                       course details
                     </Button>
