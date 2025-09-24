@@ -3,6 +3,7 @@ import Goal from "../components/goal/Goal";
 import Hero from "../components/Hero/Hero";
 import CoursesHome from "../components/homecourses/CoursesHome";
 import Curriculum from "../components/curriculum/Curriculum";
+import Reviews from "../components/reviews/Reviews";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Goal />
       <CoursesHome />
       <Curriculum />
+      <Reviews />
     </>
   );
 };
