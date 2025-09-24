@@ -63,7 +63,7 @@ const AboutHome = () => {
               />
             </div>
             {/* explore courses */}
-            <div className="flex flex-col iems-center gap-4">
+            <div className="flex flex-col iems-center gap-8">
               <div className="space-y-2 text-center">
                 <h1 className="text-3xl md:text-5xl">LET'S</h1>
                 <h1 className="text-3xl md:text-5xl">LEARN</h1>
@@ -71,7 +71,7 @@ const AboutHome = () => {
               </div>
               <Button
                 type="button"
-                className="border border-primary hover:bg-transparent hover:text-primary cursor-pointer rounded-4xl py-6 mx-auto"
+                className="border border-primary hover:bg-transparent hover:text-primary cursor-pointer rounded-4xl py-5 mx-auto"
               >
                 <a href="#COURSES" className="flex flex-col gap-1">
                   EXPLORE COURSES
