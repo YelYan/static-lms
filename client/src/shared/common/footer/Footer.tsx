@@ -46,7 +46,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 right-20">
+        <div className="absolute bottom-5 right-10">
           <div
             onClick={handleGoToTop}
             className="w-10 h-10 bg-white rounded-sm grid place-content-center cursor-pointer animate-bounce"

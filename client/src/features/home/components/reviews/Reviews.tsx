@@ -35,8 +35,8 @@ const Reviews = () => {
         {/* underline */}
         <hr className="h-[1px] w-full bg-white my-4" />
       </div>
-      <div className="container mx-auto grid grid-cols-[2fr_1fr] gap-4">
-        <div className="grid grid-cols-3 gap-8 rounded-lg">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr] gap-8 md:gap-4">
+        <div className="grid grid-cols-3 gap-8 rounded-lg order-2 md:order-1">
           {contents.map((image) => (
             <img
               key={image.id}
@@ -46,7 +46,7 @@ const Reviews = () => {
             />
           ))}
         </div>
-        <div className="grid place-content-center text-white font-telegraf-bold">
+        <div className="grid place-content-center text-white font-telegraf-bold order-1 md:order-2">
           <h3 className="text-center text-3xl">
             FEEDBACK <br /> & <br />
             REVIEWS

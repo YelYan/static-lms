@@ -77,11 +77,11 @@ const Curriculum = () => {
           <hr className="h-[3px] w-full bg-primary my-4" />
 
           {/* curruculum */}
-          <div className="grid grid-cols-4 gap-4 mt-20">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 md:gap-10 lg:gap-4 mt-20">
             {curriculumContent.map((curr) => {
               return (
                 <div
-                  className="px-4 grid gap-4 border-r-2 border-primary"
+                  className="px-4 pb-4 md:pb-0 grid gap-4 border-b md:border-b-0 md:border-r-2 border-primary"
                   key={curr.id}
                 >
                   <h3 className="font-telegraf-bold text-primary text-xl">
