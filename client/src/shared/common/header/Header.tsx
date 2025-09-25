@@ -1,25 +1,90 @@
-import { Link } from "react-router";
-import useResponsive from "@/shared/hooks/useResponsive";
-import { Menu, X } from "lucide-react";
-// import LOGO from "/img/skilltech.png";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  SheetClose,
 } from "@/components/ui/sheet";
+import useResponsive from "@/shared/hooks/useResponsive";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { Link } from "react-router";
 
-const HeaderMobile = () => {
+const links = [
+  {
+    id: "HERO",
+    label: "HOME",
+  },
+  {
+    id: "ABOUT",
+    label: "ABOUT",
+  },
+  {
+    id: "COURSES",
+    label: "COURSES",
+  },
+  {
+    id: "FAQ",
+    label: "FAQ",
+  },
+];
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const HeaderDesktop = ({
+  activeSection,
+  setActiveSection,
+}: {
+  activeSection: string;
+  setActiveSection: (id: string) => void;
+}) => {
   return (
     <nav className="flex items-center justify-between py-4 container">
       <Link to="/">
         <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
       </Link>
+
+      <ul className="flex items-center gap-8 font-telegraf-regular text-white font-bold">
+        {links.map((link) => (
+          <li key={link.id}>
+            <a
+              href={`#${link.id}`}
+              onClick={() => setActiveSection(link.id)} // ✅ Force active section on click
+              className={`${
+                activeSection === link.id
+                  ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
+                  : "text-white cursor-pointer hover:opacity-50 tracking-wider"
+              }`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+const HeaderMobile = ({
+  activeSection,
+  setActiveSection,
+}: {
+  activeSection: string;
+  setActiveSection: (id: string) => void;
+}) => {
+  return (
+    <nav className="flex items-center justify-between py-4 container">
+      <Link to="/">
+        <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
+      </Link>
+
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Menu
             size={"30px"}
             className="text-white cursor-pointer hover:opacity-50"
@@ -39,30 +104,24 @@ const HeaderMobile = () => {
             </div>
             <SheetDescription className="h-full grid place-content-center">
               <ul className="flex flex-col items-center gap-4 font-telegraf-regular text-white font-bold">
-                <li>
-                  <a
-                    href="#courses"
-                    className="cursor-pointer hover:opacity-50 tracking-wider"
-                  >
-                    COURSES
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#FAQ"
-                    className="cursor-pointer hover:opacity-50 tracking-wider"
-                  >
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#ABOUT"
-                    className="cursor-pointer hover:opacity-50 tracking-wider"
-                  >
-                    ABOUT
-                  </a>
-                </li>
+                {links.map((link) => (
+                  <li key={link.id}>
+                    <SheetClose asChild>
+                      <a
+                        href={`#${link.id}`}
+                        // The click sets the state immediately for visual feedback
+                        onClick={() => setActiveSection(link.id)}
+                        className={`${
+                          activeSection === link.id
+                            ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
+                            : "text-white cursor-pointer hover:opacity-50 tracking-wider"
+                        }`}
+                      >
+                        {link.label}
+                      </a>
+                    </SheetClose>
+                  </li>
+                ))}
               </ul>
             </SheetDescription>
           </SheetHeader>
@@ -72,48 +131,40 @@ const HeaderMobile = () => {
   );
 };
 
-const HeaderDesktop = () => {
-  return (
-    <nav className="flex items-center justify-between py-4 container">
-      <Link to="/">
-        <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
-      </Link>
-
-      <ul className="flex items-center gap-8 font-telegraf-regular text-white font-bold">
-        <li>
-          <a
-            href="#courses"
-            className="cursor-pointer hover:opacity-50 tracking-wider"
-          >
-            COURSES
-          </a>
-        </li>
-        <li>
-          <a
-            href="#FAQ"
-            className="cursor-pointer hover:opacity-50 tracking-wider"
-          >
-            FAQ
-          </a>
-        </li>
-        <li>
-          <a href="#ABOUT" className="cursor-pointer hover:opacity-50">
-            ABOUT
-          </a>
-        </li>
-      </ul>
-    </nav>
-  );
-};
-
 const Header = () => {
   const { desktopResponsive, mobileResponsive, tabletResponsive } =
     useResponsive();
+  const [activeSection, setActiveSection] = useState("HERO");
+
+  useGSAP(() => {
+    const sections = document.querySelectorAll("section[id]");
+
+    sections.forEach((section) => {
+      // 1. --- SCROLLTRIGGER FOR NAVIGATION (Existing Logic) ---
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActiveSection(section.id),
+        onEnterBack: () => setActiveSection(section.id),
+      });
+    });
+  }, []);
 
   return (
-    <header className="bg-secondary-foreground py-4">
-      {desktopResponsive && <HeaderDesktop />}
-      {(mobileResponsive || tabletResponsive) && <HeaderMobile />}
+    <header className="bg-secondary-foreground py-4 sticky top-0 z-20 shadow-lg">
+      {desktopResponsive && (
+        <HeaderDesktop
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
+      )}
+      {(mobileResponsive || tabletResponsive) && (
+        <HeaderMobile
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
+      )}
     </header>
   );
 };
