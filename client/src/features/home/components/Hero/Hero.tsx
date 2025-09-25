@@ -29,7 +29,7 @@ const Hero = () => {
             type="button"
             className="cursor-pointer rounded-3xl font-telegraf-regular border border-primary hover:bg-primary-300 hover:bg-transparent hover:text-primary"
           >
-            LEARN NOW
+            <a href="#COURSES">LEARN NOW</a>
           </Button>
         </div>
       </div>
