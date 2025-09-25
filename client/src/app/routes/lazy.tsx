@@ -12,14 +12,12 @@ export const LazyResetPassword = lazy(
   () => import("@/features/auth/pages/ResetPassword")
 );
 export const LazyOTPPage = lazy(() => import("@/features/auth/pages/OTPPage"));
-export const LazySearch = lazy(() => import("@/features/search/pages/Search"));
 
 /* Private pages */
 export const LazyNotFound = lazy(() => import("@/features/NotFound/NotFound"));
 export const LazyHome = lazy(() => import("@/features/home/pages/Home"));
-export const LazyAbout = lazy(() => import("@/features/about/pages/About"));
-export const LazyContact = lazy(
-  () => import("@/features/contact/pages/Contact")
+export const LazyCourseDetails = lazy(
+  () => import("@/features/coursedetails/pages/CourseDetails")
 );
 
 /* Dashboard pages */
