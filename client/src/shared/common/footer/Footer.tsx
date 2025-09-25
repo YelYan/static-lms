@@ -1,6 +1,39 @@
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+
 const Footer = () => {
   return (
-    <div className="container bg-foreground text-white h-full">footer</div>
+    <footer className="bg-foreground text-white h-full py-28 font-telegraf-bold">
+      <div className="container">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl md:text-7xl text-white">CONNECT WITH ME</h1>
+        </div>
+        {/* underline */}
+        <hr className="h-[1px] w-full bg-white my-4" />
+        <div className="grid gap-12 mt-20">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-2xl">Zwe Yan Naing</h2>
+            <h2 className="text-xl">+123-456-7890</h2>
+            <h2 className="text-xl">
+              Find my resume{" "}
+              <a href="#" className="underline cursor-pointer">
+                here
+              </a>
+            </h2>
+          </div>
+
+          <div className="space-y-2">
+            <h2 className="text-xl">CONNECT WITH ME</h2>
+
+            <div className="flex gap-4 items-center">
+              <Instagram size={"30px"} className="cursor-pointer" />
+              <Twitter size={"30px"} className="cursor-pointer" />
+              <Facebook size={"30px"} className="cursor-pointer" />
+              <Linkedin size={"30px"} className="cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 
