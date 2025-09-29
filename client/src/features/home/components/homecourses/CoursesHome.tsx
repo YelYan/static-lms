@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardDescription,
 } from "@/components/ui/card";
-import { Link } from "react-router";
+// import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 
 const courseContent = [
@@ -16,24 +16,28 @@ const courseContent = [
     title: "Course 1 title",
     desc: "Brief Intro about your courses and explain about your courses",
     image: "https://placehold.co/600x400",
+    course_link: "",
   },
   {
     id: 2,
     title: "Course 2 title",
     desc: "Brief Intro about your courses and explain about your courses",
     image: "https://placehold.co/600x400",
+    course_link: "",
   },
   {
     id: 3,
     title: "Course 3 title",
     desc: "Brief Intro about your courses and explain about your courses",
     image: "https://placehold.co/600x400",
+    course_link: "",
   },
   {
     id: 4,
     title: "Course 4 title",
     desc: "Brief Intro about your courses and explain about your courses",
     image: "https://placehold.co/600x400",
+    course_link: "",
   },
 ];
 
@@ -54,7 +58,7 @@ const CoursesHome = () => {
 
           {/* courses card */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-18">
-            {courseContent.map(({ id, title, desc, image }) => (
+            {courseContent.map(({ id, title, desc, image, course_link }) => (
               <Card className="font-telegraf-bold" key={id}>
                 <CardHeader className="text-center space-y-2 px-4">
                   <img
@@ -66,7 +70,7 @@ const CoursesHome = () => {
                   <CardDescription>{desc}</CardDescription>
                 </CardHeader>
                 <CardFooter className="mx-auto px-4">
-                  <Link to={`/course-details/${id}`}>
+                  {/* <Link to={`/course-details/${id}`}>
                     <Button
                       type="button"
                       size={"sm"}
@@ -74,7 +78,14 @@ const CoursesHome = () => {
                     >
                       course details
                     </Button>
-                  </Link>
+                  </Link> */}
+                  <Button
+                    type="button"
+                    size={"sm"}
+                    className="cursor-pointer border border-primary hover:bg-transparent hover:text-primary rounded-3xl"
+                  >
+                    <a href={course_link}>course details</a>
+                  </Button>
                 </CardFooter>
               </Card>
             ))}

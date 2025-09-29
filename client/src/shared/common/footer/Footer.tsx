@@ -46,10 +46,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-5 right-10">
+        <div className="absolute bottom-5 right-7">
           <div
             onClick={handleGoToTop}
-            className="w-10 h-10 bg-white rounded-sm grid place-content-center cursor-pointer animate-bounce"
+            className="w-10 h-10 bg-white rounded-sm grid place-content-center cursor-pointer animate-bounce md:hidden"
           >
             <ArrowBigUp size={"30px"} className="text-black" />
           </div>

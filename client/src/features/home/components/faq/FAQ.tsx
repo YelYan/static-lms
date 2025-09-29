@@ -2,7 +2,7 @@ import { Faq1 } from "@/components/ui/faq";
 
 const FAQ = () => {
   return (
-    <section id="FAQ" className="bg-foreground">
+    <section id="FAQ" className="bg-foreground md:py-5">
       <div className="w-full container">
         <div className="flex items-center justify-between font-telegraf-bold">
           <h1 className="text-3xl md:text-7xl text-white">FAQ</h1>

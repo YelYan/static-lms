@@ -152,7 +152,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-secondary-foreground py-4 sticky top-0 z-20 shadow-lg">
+    <header className="bg-secondary-foreground py-1 sticky top-0 z-20 shadow-lg">
       {desktopResponsive && (
         <HeaderDesktop
           activeSection={activeSection}
