@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import LOGO from "/img/skilltech-white.png";
 import useResponsive from "@/shared/hooks/useResponsive";
+import MainLogo from "/img/balance.png";
 
 const EngineeringAIAbout = () => {
   return (
@@ -46,7 +47,11 @@ const DesktopAboutHome = () => {
       <div className="w-full font-telegraf-bold">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl md:text-7xl">WHAT WE TEACH?</h1>
-          <p>LOGO</p>
+          <img
+            src={MainLogo}
+            className="w-20 h-20 object-center object-cover"
+            alt="jimmy's cook"
+          />
         </div>
         {/* underline */}
         <hr className="h-[3px] w-full bg-foreground my-4" />
@@ -99,10 +104,14 @@ const MobileTabletAboutHome = () => {
       <div className="w-full font-telegraf-bold">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl md:text-7xl">WHAT WE TEACH?</h1>
-          <p>LOGO</p>
+          <img
+            src={MainLogo}
+            className="w-17 h-17 object-center object-cover items-end"
+            alt="jimmy's cook"
+          />
         </div>
         {/* underline */}
-        <hr className="h-[3px] w-full bg-foreground my-4" />
+        <hr className="h-[3px] w-full bg-foreground my-2" />
         {/* about  */}
         <div className="font-telegraf-bold py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center align-middle gap-4">

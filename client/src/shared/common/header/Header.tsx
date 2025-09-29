@@ -13,7 +13,7 @@ import { useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Link } from "react-router";
+import LOGO from "/img/balance.png";
 
 const links = [
   {
@@ -44,10 +44,14 @@ const HeaderDesktop = ({
   setActiveSection: (id: string) => void;
 }) => {
   return (
-    <nav className="flex items-center justify-between py-4 container">
-      <Link to="/">
-        <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
-      </Link>
+    <nav className="flex items-center justify-between mx-auto w-full px-5 lg:px-24">
+      <a href="#">
+        <img
+          src={LOGO}
+          className="w-18 h-18 object-center object-cover"
+          alt="jimmy's cook"
+        />
+      </a>
 
       <ul className="flex items-center gap-8 font-telegraf-regular text-white font-bold">
         {links.map((link) => (
@@ -57,7 +61,7 @@ const HeaderDesktop = ({
               onClick={() => setActiveSection(link.id)} // ✅ Force active section on click
               className={`${
                 activeSection === link.id
-                  ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
+                  ? "opacity-50 cursor-pointer hover:opacity-50 tracking-wider"
                   : "text-white cursor-pointer hover:opacity-50 tracking-wider"
               }`}
             >
@@ -79,9 +83,13 @@ const HeaderMobile = ({
 }) => {
   return (
     <nav className="flex items-center justify-between py-4 container">
-      <Link to="/">
-        <h1 className="font-telegraf-bold text-2xl text-primary">LOGO</h1>
-      </Link>
+      <a href="#">
+        <img
+          src={LOGO}
+          className="w-18 h-18 object-center object-cover"
+          alt="jimmy's cook"
+        />
+      </a>
 
       <Sheet>
         <SheetTrigger asChild>
@@ -113,7 +121,7 @@ const HeaderMobile = ({
                         onClick={() => setActiveSection(link.id)}
                         className={`${
                           activeSection === link.id
-                            ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
+                            ? "opacity-50 cursor-pointer hover:opacity-50 tracking-wider"
                             : "text-white cursor-pointer hover:opacity-50 tracking-wider"
                         }`}
                       >
