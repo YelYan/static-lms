@@ -7,37 +7,189 @@ import {
   CardFooter,
   CardDescription,
 } from "@/components/ui/card";
-// import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
+import CourseDialog from "./CourseDialog";
+
+// Detailed course content for each module
 const courseContent = [
   {
     id: 1,
-    title: "Course 1 title",
-    desc: "Brief Intro about your courses and explain about your courses",
+    title: "Module 1: Getting Started with Python",
+    desc: "Master Python fundamentals and build a strong programming foundation",
     image: "https://placehold.co/600x400",
     course_link: "",
+    details: {
+      overview:
+        "This module introduces you to the world of Python programming, from setting up your development environment to writing your first programs and understanding core programming concepts.",
+      topics: [
+        "Getting started with Python",
+        "• Course Introduction and Learning Path",
+        "• Welcome to the Pythonic World",
+        "• Setting Up Your Python Environment (Anaconda, VS Code, Jupyter, Google Colab)",
+        "• Your First Python Program",
+        "• Understanding Variables and Data Types",
+        "• How to Learn Python in AI era",
+        "Control Flow in Python",
+        "• Conditionals in Python (if, elif, else)",
+        "• Comparison and Logical Operators",
+        "• Loops in Python (for and while loops)",
+        "• Break, Continue, and Pass Statements",
+        "• Practical Exercise: Simple Engineering Calculators",
+        "Functions and Data Structures",
+        "• Introduction to Functions",
+        "• Function Parameters and Return Values",
+        "• Lists, Tuples, and Dictionaries",
+        "• Working with Strings",
+        "• List Comprehensions (Introduction)",
+        "• Practical Exercise: Organizing Structural Data",
+        "Working with Files and Error Handling",
+        "• Reading and Writing Text Files",
+        "• Working with CSV Files",
+        "• Exception Handling Basics",
+        "• Try, Except, Finally Blocks",
+        "• Practical Exercise: Reading Load Data from Files",
+        "Practice and Mini-Project",
+        "• Code Review and Best Practices",
+        "• Debugging Techniques",
+        "• Mini-Project: Load Combination Calculator",
+        "• Module Assessment",
+      ],
+      duration: "6-8 hours",
+      level: "Beginner",
+      projects: ["Load Combination Calculator"],
+    },
   },
   {
     id: 2,
-    title: "Course 2 title",
-    desc: "Brief Intro about your courses and explain about your courses",
+    title: "Module 2: Structural Design with Python",
+    desc: "Apply Python to solve structural engineering problems and design calculations",
     image: "https://placehold.co/600x400",
     course_link: "",
+    details: {
+      overview:
+        "Transform your structural design workflow from manual Excel calculations to automated Python scripts. Learn to design reinforced concrete sections, steel members, and connections using industry codes and standards.",
+      topics: [
+        "Introduction: From Excel to Python",
+        "• Transitioning Your Design Workflow",
+        "• Setting Up Your Design Environment",
+        "",
+        "Reinforced Concrete Section Design with Python",
+        "• ACI 318 / Eurocode 2 Overview",
+        "• Flexural Design of Rectangular Beams",
+        "• Shear Design of RC Beams",
+        "• Column Design Fundamentals",
+        "",
+        "Steel Member Design with Python",
+        "• AISC 360 / Eurocode 3 Overview",
+        "• Tension Member Design",
+        "• Compression Member Design",
+        "• Flexural Member Design",
+        "",
+        "Steel Connection Design with Python",
+        "• Bolted Connection Design",
+        "• Welded Connection Design",
+        "• Simple Connection Analysis",
+      ],
+      duration: "8-10 hours",
+      level: "Intermediate",
+      projects: [
+        "RC Beam Design Calculator",
+        "Steel Column Capacity Analysis",
+        "Connection Design Tool",
+      ],
+    },
   },
   {
     id: 3,
-    title: "Course 3 title",
-    desc: "Brief Intro about your courses and explain about your courses",
+    title: "Module 3: Automation with ETABS API",
+    desc: "Automate ETABS workflows using Python API for efficient structural analysis",
     image: "https://placehold.co/600x400",
     course_link: "",
+    details: {
+      overview:
+        "Master the ETABS API to automate structural modeling, analysis, and result extraction, significantly reducing manual work and increasing productivity.",
+      topics: [
+        "Introduction to Automation and APIs",
+        "• What is Automation and Why It Matters?",
+        "• Introduction to APIs (Application Programming Interfaces)",
+        "• ETABS OAPI Overview",
+        "• Setting Up ETABS API Environment",
+        "• Your First ETABS Python Script",
+        "Basic FEM Workflow",
+        "• Understanding the FEM Process",
+        "• ETABS Model Structure",
+        "• Creating Simple Models via API",
+        "• Running Analysis Programmatically",
+        "• Basic Result Extraction",
+        "Automated FEM Preprocessing Workflow",
+        "• Automated Model Generation from Excel/CSV",
+        "• Creating Grid Systems",
+        "• Defining Materials and Sections",
+        "• Assigning Loads Automatically",
+        "• Parametric Model Creation",
+        "Automated FEM Postprocessing Workflow",
+        "• Extracting Analysis Results",
+        "• Processing Member Forces",
+        "• Generating Design Reports",
+        "• Exporting Results to Excel",
+        "• Creating Custom Output Files",
+        "Data and Result Visualization",
+        "• Data Visualization with Pandas",
+        "• Creating Engineering Charts with Matplotlib",
+        "• Automated Report Generation",
+      ],
+      duration: "10-12 hours",
+      level: "Advanced",
+      projects: ["Complete ETABS Workflow Automation"],
+    },
   },
   {
     id: 4,
-    title: "Course 4 title",
-    desc: "Brief Intro about your courses and explain about your courses",
+    title: "Module 4: Advanced Topics",
+    desc: "Explore advanced Python applications in engineering and AI integration",
     image: "https://placehold.co/600x400",
     course_link: "",
+    details: {
+      overview:
+        "Dive into advanced Python topics including machine learning, data analysis, and advanced engineering applications to prepare for the AI-driven future.",
+      topics: [
+        "OOP Fundamentals",
+        "• What is Object-Oriented Programming?",
+        "• Classes and Objects",
+        "• Attributes and Methods",
+        "• The init Method",
+        "• Example: Creating a Beam Class",
+        "Introduction to Web Apps for Engineers",
+        "• Why Create Engineering Software?",
+        "• Introduction to Streamlit",
+        "• Creating Your First Engineering App",
+        "• User Input and Output Design",
+        "• Deploying Simple Calculations",
+        "Building Your Personal Concrete Design Software",
+        "• Planning Your Application",
+        "• Creating the Calculation Engine",
+        "• Designing the User Interface with Streamlit",
+        "• Input Validation and Error Handling",
+        "• Testing Your Application",
+        "Deployment and Sharing",
+        "• Introduction to Git and Version Control",
+        "• Preparing Your App for Deployment",
+        "• Deploying to Streamlit Cloud",
+        "• Sharing Your Software with Colleagues",
+        "• Best Practices for Engineering Software",
+        "Future of Structural Engineering and Next Steps",
+        "• AI and Machine Learning in Structural Engineering",
+        "• Emerging Technologies and Trends",
+        "• Building Your Continuous Learning Path",
+        "• Course Wrap-Up and Certificate",
+        "• Preview of Upcoming Advanced Courses",
+      ],
+      duration: "12-15 hours",
+      level: "Advanced",
+      projects: [],
+    },
   },
 ];
 
@@ -49,7 +201,12 @@ const CoursesHome = () => {
           <div className="flex items-center justify-between font-telegraf-bold">
             <div className="flex items-center gap-2">
               <img src={LOGOPYTHON} width={55} height={55} alt="python logo" />
-              <img src={LOGOTENSOR} width={70} height={70} alt="python logo" />
+              <img
+                src={LOGOTENSOR}
+                width={70}
+                height={70}
+                alt="tensorflow logo"
+              />
             </div>
             <h1 className="text-3xl md:text-7xl text-primary">COURSES</h1>
           </div>
@@ -58,7 +215,7 @@ const CoursesHome = () => {
 
           {/* courses card */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-18">
-            {courseContent.map(({ id, title, desc, image, course_link }) => (
+            {courseContent.map(({ id, title, desc, image, details }) => (
               <Card className="font-telegraf-bold" key={id}>
                 <CardHeader className="text-center space-y-2 px-4">
                   <img
@@ -70,22 +227,23 @@ const CoursesHome = () => {
                   <CardDescription>{desc}</CardDescription>
                 </CardHeader>
                 <CardFooter className="mx-auto px-4">
-                  {/* <Link to={`/course-details/${id}`}>
-                    <Button
-                      type="button"
-                      size={"sm"}
-                      className="cursor-pointer border border-primary hover:bg-transparent hover:text-primary rounded-3xl"
-                    >
-                      course details
-                    </Button>
-                  </Link> */}
-                  <Button
-                    type="button"
-                    size={"sm"}
-                    className="cursor-pointer border border-primary hover:bg-transparent hover:text-primary rounded-3xl"
-                  >
-                    <a href={course_link}>course details</a>
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        type="button"
+                        size={"sm"}
+                        className="cursor-pointer border border-primary hover:bg-transparent hover:text-primary rounded-3xl"
+                      >
+                        course details
+                      </Button>
+                    </DialogTrigger>
+                    <CourseDialog
+                      id={id}
+                      title={title}
+                      description={desc}
+                      details={details}
+                    />
+                  </Dialog>
                 </CardFooter>
               </Card>
             ))}
