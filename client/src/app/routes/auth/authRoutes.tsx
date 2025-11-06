@@ -13,8 +13,8 @@ const authRoutes: RoutesT = [
     element: <LazyLogin />,
   },
   {
-    key: "register",
-    path: "/register",
+    key: "signup",
+    path: "/signup",
     element: <LazyRegister />,
   },
   {

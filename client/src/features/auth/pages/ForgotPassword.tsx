@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     forgotPasswordMutation.mutate(data);
   };
   return (
-    <div>
+    <div className="py-4">
       <AuthForm
         type="forgot"
         onSubmit={onSubmit}

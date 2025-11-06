@@ -1,7 +1,7 @@
 import { loginformControls, registerformControls, forgotPasswordformControls, resetPasswordFormControls } from "@/shared/constants";
 import { buildSchemas } from "@/shared/hooks/buildSchemas";
 
-export type AuthType = "login" | "register" | "forgot" | "reset";
+export type AuthType = "login" | "signup" | "forgot" | "reset";
 
 export type FormControlsT = Record<"name" | "label" | "componentType" , string> & { 
     type? : string

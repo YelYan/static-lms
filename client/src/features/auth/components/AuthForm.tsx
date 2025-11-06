@@ -72,9 +72,9 @@ const AuthForm = ({
           title: "Login to your account",
           description: "Enter your email below to login to your account",
           actionText: "Sign Up",
-          actionLink: "/register",
+          actionLink: "/signup",
         };
-      case "register":
+      case "signup":
         return {
           title: "Create your account",
           description: "Enter your details below to register a new account",
@@ -117,7 +117,7 @@ const AuthForm = ({
     isSubmitting || isPending || (type === "reset" && !!passwordMatchError);
 
   return (
-    <Card className="w-full max-w-sm mx-auto">
+    <Card className="w-full max-w-sm mx-auto font-telegraf-regular">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -179,13 +179,13 @@ const AuthForm = ({
 
           {type === "login" && (
             <div className="text-sm text-right">
-              <Link to="/forgot-password" className="text-blue-500 underline">
+              <Link to="/forgot-password" className="text-blue-700 underline">
                 Forgot password?
               </Link>
             </div>
           )}
           <Button
-            className="bg-blue-300 cursor-pointer relative w-full"
+            className="bg-blue-700 cursor-pointer relative w-full"
             type="submit"
             disabled={isSubmitDisabled}
           >

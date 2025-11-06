@@ -11,7 +11,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="py-4">
       <AuthForm
         type="login"
         onSubmit={onSubmit}

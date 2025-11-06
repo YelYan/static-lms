@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <section id="HERO" className="container min-h-[70vh] md:min-h-screen">
+    <section
+      id="HERO"
+      className="container min-h-[70vh] md:min-h-screen bg-secondary-foreground text-white"
+    >
       <div className="min-h-[70vh] md:min-h-[90vh] grid place-content-center">
         <div className="flex flex-col items-center gap-8">
           <h1 className="font-telegraf-bold text-center text-3xl md:text-6xl">

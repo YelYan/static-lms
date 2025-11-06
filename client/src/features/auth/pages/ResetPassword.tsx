@@ -20,7 +20,7 @@ const ResetPassword = () => {
     });
   };
   return (
-    <div>
+    <div className="py-4">
       <AuthForm
         type="reset"
         onSubmit={onSubmit}

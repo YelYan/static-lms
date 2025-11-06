@@ -10,11 +10,9 @@ const Register = () => {
     registerMutation.mutate(data);
   }
   return (
-    <div>
-      <h1>Register</h1>
-
+    <div className="py-4">
       <AuthForm
-        type="register"
+        type="signup"
         onSubmit={onSubmit}
         formControls={registerformControls}
         formSchemas={registerSchema}
