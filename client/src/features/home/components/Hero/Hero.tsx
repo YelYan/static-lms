@@ -9,10 +9,10 @@ const Hero = () => {
       <div className="min-h-[70vh] md:min-h-[90vh] grid place-content-center">
         <div className="flex flex-col items-center gap-8">
           <h1 className="font-telegraf-bold text-center text-3xl md:text-6xl">
-            <span>Ai</span>
-            &nbsp;& <span>Machine Learning</span>
+            <span className="text-primary">Ai</span>
+            &nbsp;& <span className="text-primary">Machine Learning</span>
             <br />
-            <span className="text-primary">for Structural Engineers</span>
+            for Structural Engineers
           </h1>
 
           <div className="space-y-2 font-telegraf-regular text-center italic font-bold">
@@ -36,8 +36,6 @@ const Hero = () => {
           </Button>
         </div>
       </div>
-
-      <hr className="h-[2.5px] w-full bg-primary my-2 lg:my-8" />
     </section>
   );
 };

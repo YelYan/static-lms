@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import LOGO from "/img/skilltech-white.png";
-import useResponsive from "@/shared/hooks/useResponsive";
-import MainLogo from "/img/balance.png";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import PYTHONLOGO from "/img/python-logo.svg";
 
 const EngineeringAIAbout = () => {
   return (
@@ -45,107 +45,49 @@ const DesktopAboutHome = () => {
   return (
     <div className="container py-20">
       <div className="w-full font-telegraf-bold">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center">
           <h1 className="text-2xl md:text-7xl">WHAT WE TEACH?</h1>
-          <img
-            src={MainLogo}
-            className="w-20 h-20 object-center object-cover"
-            alt="jimmy's cook"
-          />
         </div>
-        {/* underline */}
-        <hr className="h-[3px] w-full bg-foreground my-4" />
         {/* about  */}
-        <div className="font-telegraf-bold">
-          <div className="relative grid place-content-center h-lvh">
-            <div className="absolute top-20 left-40 border-3 border-primary rounded-2xl py-5 px-10 text-white w-3xs">
-              <p className="text-center">
-                PYTHON FOR <br />
-                ENGINEERING <br />
-                DESIGN
-              </p>
-            </div>
-            <div className="absolute bottom-40 left-40 border-3 border-primary rounded-2xl py-5 px-10 text-white w-3xs">
-              <p className="text-center">
-                PYTHON FOR <br />
-                AUTOMATION IN <br />
-                ENGINEERING TASK
-              </p>
-            </div>
-            <p>testing</p>
-            <div className="absolute top-20  right-40 border-3 border-primary rounded-2xl py-5 px-10 text-white w-3xs">
-              <p className="text-center">
-                MACHINE LEARNING <br />
-                & DEEP LEARNING <br />
-                FOR STRUCTURAL <br />
-                ENGINEER
-              </p>
-            </div>
-            <div className="absolute bottom-30 right-40 border-3 border-primary rounded-2xl py-5 px-10 text-white w-3xs">
-              <p className="text-center">
-                GENERATIVE AI <br />
-                FOR STRUCTURAL <br />
-                ENGINEER
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* about home second part */}
-        <EngineeringAIAbout />
-      </div>
-    </div>
-  );
-};
-
-const MobileTabletAboutHome = () => {
-  return (
-    <div className="container py-20">
-      <div className="w-full font-telegraf-bold">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl md:text-7xl">WHAT WE TEACH?</h1>
-          <img
-            src={MainLogo}
-            className="w-17 h-17 object-center object-cover items-end"
-            alt="jimmy's cook"
-          />
-        </div>
-        {/* underline */}
-        <hr className="h-[3px] w-full bg-foreground my-2" />
-        {/* about  */}
-        <div className="font-telegraf-bold py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center align-middle gap-4">
-            <div className="border-3 border-primary rounded-2xl p-5 text-white w-3xs h-auto">
-              <p className="text-center w-full h-full">
-                PYTHON FOR <br />
-                ENGINEERING <br />
-                DESIGN
-              </p>
-            </div>
-            <div className=" border-3 border-primary rounded-2xl p-5 text-white w-3xs">
-              <p className="text-center">
-                PYTHON FOR <br />
-                AUTOMATION IN <br />
-                ENGINEERING TASK
-              </p>
-            </div>
-
-            <div className="border-3 border-primary rounded-2xl p-5 text-white w-3xs">
-              <p className="text-center">
-                MACHINE LEARNING <br />
-                & DEEP LEARNING <br />
-                FOR STRUCTURAL <br />
-                ENGINEER
-              </p>
-            </div>
-            <div className="border-3 border-primary rounded-2xl p-5 text-white w-3xs">
-              <p className="text-center">
-                GENERATIVE AI <br />
-                FOR STRUCTURAL <br />
-                ENGINEER
-              </p>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-20 ">
+          <Card className="bg-[#000C31] border-none p-4 h-[400px]">
+            <CardHeader>
+              <img
+                src={PYTHONLOGO}
+                alt=""
+                width={90}
+                height={90}
+                className="mx-auto object-cover"
+              />
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 text-center p-5">
+              <h3 className="text-xl md:text-2xl text-white">
+                PYTHON FOR ENGINEERING <br /> DESIGN
+              </h3>
+              <h3 className="text-xl md:text-2xl text-white">
+                PYTHON FOR AUTOMATION <br /> IN ENGINEERING TASK
+              </h3>
+            </CardContent>
+          </Card>
+          <Card className="bg-[#000C31] border-none p-4">
+            <CardHeader>
+              <img
+                src={PYTHONLOGO}
+                alt=""
+                width={90}
+                height={90}
+                className="mx-auto object-cover"
+              />
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 text-center p-5">
+              <h3 className="text-xl md:text-2xl text-white">
+                MACHINE LEARNING <br />& DEEP LEARNING
+              </h3>
+              <h3 className="text-xl md:text-2xl text-white">
+                GENERATIVE AI FOR <br /> STRUCTURAL ENGINEER
+              </h3>
+            </CardContent>
+          </Card>
         </div>
 
         {/* about home second part */}
@@ -156,12 +98,9 @@ const MobileTabletAboutHome = () => {
 };
 
 const AboutHome = () => {
-  const { mobileResponsive, desktopResponsive, tabletResponsive } =
-    useResponsive();
   return (
     <section id="ABOUT" className="bg-foreground text-white">
-      {desktopResponsive && <DesktopAboutHome />}
-      {(mobileResponsive || tabletResponsive) && <MobileTabletAboutHome />}
+      <DesktopAboutHome />
     </section>
   );
 };

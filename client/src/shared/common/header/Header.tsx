@@ -62,7 +62,7 @@ const HeaderDesktop = ({
                   onClick={() => setActiveSection(link.id)}
                   className={`${
                     activeSection === link.id
-                      ? "text-blue-700 cursor-pointer hover:opacity-50 tracking-wider"
+                      ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
                       : "text-black cursor-pointer hover:opacity-50 tracking-wider"
                   }`}
                   to={`/${link.id.toLowerCase()}`}
@@ -82,7 +82,7 @@ const HeaderDesktop = ({
                     onClick={() => setActiveSection(link.id)}
                     className={`${
                       activeSection === link.id
-                        ? "text-blue-700 cursor-pointer hover:opacity-50 tracking-wider"
+                        ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
                         : "text-black cursor-pointer hover:opacity-50 tracking-wider"
                     }`}
                   >
@@ -104,7 +104,7 @@ const HeaderDesktop = ({
                     }}
                     className={`${
                       activeSection === link.id
-                        ? "text-blue-700 cursor-pointer hover:opacity-50 tracking-wider"
+                        ? "text-primary cursor-pointer hover:opacity-50 tracking-wider"
                         : "text-black cursor-pointer hover:opacity-50 tracking-wider"
                     }`}
                   >
@@ -193,7 +193,7 @@ const HeaderMobile = ({
                           onClick={() => setActiveSection(link.id)}
                           className={`${
                             activeSection === link.id
-                              ? "text-blue-700 cursor-pointer hover:opacity-70 tracking-wider"
+                              ? "text-primary cursor-pointer hover:opacity-70 tracking-wider"
                               : "text-white cursor-pointer hover:opacity-70 tracking-wider"
                           }`}
                         >
