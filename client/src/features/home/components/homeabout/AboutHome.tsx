@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import LOGO from "/img/skilltech-white.png";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PYTHONLOGO from "/img/python-logo.svg";
+import ATOM from "/img/atom-remove.png";
 
 const EngineeringAIAbout = () => {
   return (
@@ -14,11 +14,12 @@ const EngineeringAIAbout = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* video */}
         <div className="h-fit">
-          <img
-            src={LOGO}
-            alt="AI structural engineering course video"
-            className="object-cover object-center h-fit rounded-lg"
-          />
+          <video
+            src="https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+            controls
+          >
+            Your browser does not support video tag.
+          </video>
         </div>
         {/* explore courses */}
         <div className="flex flex-col iems-center gap-8">
@@ -72,7 +73,7 @@ const DesktopAboutHome = () => {
           <Card className="bg-[#000C31] border-none p-4">
             <CardHeader>
               <img
-                src={PYTHONLOGO}
+                src={ATOM}
                 alt=""
                 width={90}
                 height={90}
