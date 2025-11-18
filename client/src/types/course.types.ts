@@ -1,13 +1,27 @@
-// types/course.types.ts
+export interface Lesson {
+  id: string;
+  title: string;
+  duration: string;
+  videoUrl: string;
+  isCompleted: boolean;
+  isLocked: boolean;
+  description?: string;
+  resources?: Resource[];
+}
+
 export interface Module {
   id: string;
   title: string;
-  description: string;
-  duration: string;
-  lessons: number;
+  lessons: Lesson[];
   isCompleted: boolean;
-  isLocked: boolean;
-  videoUrl?: string;
+  isExpanded?: boolean;
+}
+
+export interface Resource {
+  id: string;
+  title: string;
+  type: 'pdf' | 'document' | 'link';
+  url: string;
 }
 
 export interface Course {
@@ -15,10 +29,8 @@ export interface Course {
   title: string;
   description: string;
   instructor: string;
-  thumbnail: string;
-  duration: string;
-  studentsEnrolled: number;
-  rating: number;
   modules: Module[];
+  totalDuration: string;
+  totalLessons: number;
   progress: number;
 }

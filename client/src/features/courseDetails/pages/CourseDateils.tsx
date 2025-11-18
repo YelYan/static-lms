@@ -1,400 +1,617 @@
 import React, { useState, useEffect } from "react";
 import {
-  Lock,
+  ChevronDown,
+  ChevronRight,
   PlayCircle,
   CheckCircle2,
+  Lock,
   Clock,
-  Users,
-  Star,
+  FileText,
+  Download,
+  Menu,
+  X,
+  Home,
   BookOpen,
-  Trophy,
-  ChevronRight,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { cn } from "@/lib/utils";
-import type { Module, Course } from "@/types/course.types";
+import VideoPlayer from "../components/VideoPlayer";
+import type { Course, Module, Lesson } from "@/types/course.types";
 
 const CourseDetails: React.FC = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [course, setCourse] = useState<Course>({
     id: "1",
-    title: "Complete React & TypeScript Masterclass 2024",
+    title: "Complete React & TypeScript Masterclass",
     description:
-      "Master React, TypeScript, and modern web development with hands-on projects and real-world applications.",
+      "Master React, TypeScript, and modern web development with hands-on projects.",
     instructor: "John Doe",
-    thumbnail:
-      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
-    duration: "12 hours",
-    studentsEnrolled: 1234,
-    rating: 4.8,
+    totalDuration: "12 hours",
+    totalLessons: 45,
     progress: 0,
     modules: [
       {
         id: "1",
-        title: "Module 1: Introduction to React & TypeScript",
-        description:
-          "Learn the fundamentals of React and TypeScript, setting up your development environment.",
-        duration: "3 hours",
-        lessons: 8,
+        title: "Getting Started",
         isCompleted: false,
-        isLocked: false,
-        videoUrl: "/videos/module1.mp4",
+        isExpanded: true,
+        lessons: [
+          {
+            id: "1-1",
+            title: "Course Introduction",
+            duration: "5:30",
+            videoUrl: "/video1.mp4",
+            isCompleted: false,
+            isLocked: false,
+            description:
+              "Welcome to the course! Learn what we will build together.",
+            resources: [
+              {
+                id: "r1",
+                title: "Course Slides",
+                type: "pdf",
+                url: "/slides.pdf",
+              },
+              {
+                id: "r2",
+                title: "Setup Guide",
+                type: "document",
+                url: "/setup.doc",
+              },
+            ],
+          },
+          {
+            id: "1-2",
+            title: "Environment Setup",
+            duration: "12:45",
+            videoUrl: "/video2.mp4",
+            isCompleted: false,
+            isLocked: false,
+            description:
+              "Set up your development environment with all necessary tools.",
+          },
+          {
+            id: "1-3",
+            title: "Project Structure",
+            duration: "8:20",
+            videoUrl: "/video3.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description:
+              "Understanding the project structure and best practices.",
+          },
+        ],
       },
       {
         id: "2",
-        title: "Module 2: Advanced Component Patterns",
-        description:
-          "Dive deep into advanced React patterns, hooks, and component composition.",
-        duration: "3 hours",
-        lessons: 10,
+        title: "React Fundamentals",
         isCompleted: false,
-        isLocked: true,
-        videoUrl: "/videos/module2.mp4",
+        isExpanded: false,
+        lessons: [
+          {
+            id: "2-1",
+            title: "Components & Props",
+            duration: "15:30",
+            videoUrl: "/video4.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Deep dive into React components and props.",
+          },
+          {
+            id: "2-2",
+            title: "State Management",
+            duration: "18:00",
+            videoUrl: "/video5.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Learn about state management in React.",
+          },
+          {
+            id: "2-3",
+            title: "Hooks Deep Dive",
+            duration: "22:15",
+            videoUrl: "/video6.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Master React Hooks.",
+          },
+        ],
       },
       {
         id: "3",
-        title: "Module 3: State Management & Data Fetching",
-        description:
-          "Master state management with Context API, Redux, and modern data fetching techniques.",
-        duration: "3 hours",
-        lessons: 9,
+        title: "TypeScript Integration",
         isCompleted: false,
-        isLocked: true,
-        videoUrl: "/videos/module3.mp4",
+        isExpanded: false,
+        lessons: [
+          {
+            id: "3-1",
+            title: "TypeScript Basics",
+            duration: "14:00",
+            videoUrl: "/video7.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Introduction to TypeScript.",
+          },
+          {
+            id: "3-2",
+            title: "Types & Interfaces",
+            duration: "16:30",
+            videoUrl: "/video8.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Working with types and interfaces.",
+          },
+        ],
       },
       {
         id: "4",
-        title: "Module 4: Testing & Deployment",
-        description:
-          "Learn testing strategies and deploy your applications to production.",
-        duration: "3 hours",
-        lessons: 7,
+        title: "Advanced Patterns",
         isCompleted: false,
-        isLocked: true,
-        videoUrl: "/videos/module4.mp4",
+        isExpanded: false,
+        lessons: [
+          {
+            id: "4-1",
+            title: "Custom Hooks",
+            duration: "20:00",
+            videoUrl: "/video9.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Creating custom React hooks.",
+          },
+          {
+            id: "4-2",
+            title: "Performance Optimization",
+            duration: "25:00",
+            videoUrl: "/video10.mp4",
+            isCompleted: false,
+            isLocked: true,
+            description: "Optimize React app performance.",
+          },
+        ],
       },
     ],
   });
 
-  const [activeModule, setActiveModule] = useState<string>("1");
+  const [currentLesson, setCurrentLesson] = useState<Lesson | null>(
+    course.modules[0].lessons[0]
+  );
+  const [currentModule, setCurrentModule] = useState<Module | null>(
+    course.modules[0]
+  );
 
+  // Check if mobile
   useEffect(() => {
-    // Calculate progress based on completed modules
-    const completedModules = course.modules.filter((m) => m.isCompleted).length;
-    const progress = (completedModules / course.modules.length) * 100;
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth < 768) {
+        setSidebarOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Calculate progress
+  useEffect(() => {
+    const totalLessons = course.modules.reduce(
+      (acc, module) => acc + module.lessons.length,
+      0
+    );
+    const completedLessons = course.modules.reduce(
+      (acc, module) =>
+        acc + module.lessons.filter((lesson) => lesson.isCompleted).length,
+      0
+    );
+    const progress =
+      totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
     setCourse((prev) => ({ ...prev, progress }));
   }, [course.modules]);
 
-  const handleModuleComplete = (moduleId: string) => {
-    setCourse((prev) => {
-      const updatedModules = prev.modules.map((module, index) => {
-        if (module.id === moduleId) {
-          // Mark current module as completed
-          module = { ...module, isCompleted: true };
-        }
-        // Unlock next module if current module is completed
-        if (
-          index > 0 &&
-          prev.modules[index - 1].id === moduleId &&
-          index < prev.modules.length
-        ) {
-          module = { ...module, isLocked: false };
-        }
-        return module;
-      });
-      return { ...prev, modules: updatedModules };
-    });
-  };
-
-  const handleModuleClick = (moduleId: string, isLocked: boolean) => {
-    if (!isLocked) {
-      setActiveModule(moduleId);
+  const handleLessonClick = (lesson: Lesson, module: Module) => {
+    if (!lesson.isLocked) {
+      setCurrentLesson(lesson);
+      setCurrentModule(module);
+      if (isMobile) {
+        setSidebarOpen(false);
+      }
     }
   };
 
+  const handleLessonComplete = () => {
+    if (currentLesson && currentModule) {
+      setCourse((prev) => {
+        const updatedModules = prev.modules.map((module) => {
+          if (module.id === currentModule.id) {
+            const updatedLessons = module.lessons.map((lesson, index) => {
+              // Mark current lesson as completed
+              if (lesson.id === currentLesson.id) {
+                lesson = { ...lesson, isCompleted: true };
+              }
+              // Unlock next lesson in same module
+              if (
+                index > 0 &&
+                module.lessons[index - 1].id === currentLesson.id
+              ) {
+                lesson = { ...lesson, isLocked: false };
+              }
+              return lesson;
+            });
+
+            // Check if module is completed
+            const moduleCompleted = updatedLessons.every((l) => l.isCompleted);
+
+            return {
+              ...module,
+              lessons: updatedLessons,
+              isCompleted: moduleCompleted,
+            };
+          }
+          return module;
+        });
+
+        // Unlock first lesson of next module if current module is completed
+        updatedModules.forEach((module, moduleIndex) => {
+          if (moduleIndex > 0 && updatedModules[moduleIndex - 1].isCompleted) {
+            if (module.lessons.length > 0) {
+              module.lessons[0] = { ...module.lessons[0], isLocked: false };
+            }
+          }
+        });
+
+        return { ...prev, modules: updatedModules };
+      });
+    }
+  };
+
+  const toggleModule = (moduleId: string) => {
+    setCourse((prev) => ({
+      ...prev,
+      modules: prev.modules.map((module) => ({
+        ...module,
+        isExpanded:
+          module.id === moduleId ? !module.isExpanded : module.isExpanded,
+      })),
+    }));
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Course Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <Badge className="mb-4 bg-white/20 text-white border-white/30">
-                Course
-              </Badge>
-              <h1 className="text-4xl font-bold mb-4">{course.title}</h1>
-              <p className="text-lg mb-6 text-white/90">{course.description}</p>
-
-              <div className="flex flex-wrap gap-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  <span>{course.studentsEnrolled} students</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  <span>{course.duration}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  <span>{course.rating}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 text-sm">
-                <span>Instructor:</span>
-                <span className="font-semibold">{course.instructor}</span>
-              </div>
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "border-r bg-card transition-all duration-300",
+          sidebarOpen ? "w-80" : "w-0",
+          isMobile && "fixed inset-y-0 left-0 z-50"
+        )}
+      >
+        <div className={cn("h-full flex flex-col", !sidebarOpen && "hidden")}>
+          {/* Sidebar Header */}
+          <div className="p-4 border-b">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-lg">Course Content</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSidebarOpen(false)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
             </div>
 
-            <div className="relative">
-              <img
-                src={course.thumbnail}
-                alt={course.title}
-                className="rounded-lg shadow-2xl w-full h-[300px] object-cover"
-              />
-              <div className="absolute inset-0 bg-black/20 rounded-lg flex items-center justify-center">
-                <PlayCircle className="w-20 h-20 text-white/90 hover:scale-110 transition-transform cursor-pointer" />
+            {/* Progress */}
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Progress</span>
+                <span className="font-medium">
+                  {Math.round(course.progress)}%
+                </span>
               </div>
+              <Progress value={course.progress} className="h-2" />
+              <p className="text-xs text-muted-foreground">
+                {course.modules.reduce(
+                  (acc, m) =>
+                    acc + m.lessons.filter((l) => l.isCompleted).length,
+                  0
+                )}{" "}
+                of {course.totalLessons} lessons completed
+              </p>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Progress Section */}
-      <div className="container mx-auto px-4 -mt-8">
-        <Card className="shadow-lg">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-lg font-semibold">Your Progress</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {course.modules.filter((m) => m.isCompleted).length} of{" "}
-                  {course.modules.length} modules completed
-                </p>
-              </div>
-              {course.progress === 100 && (
-                <Trophy className="w-8 h-8 text-yellow-500" />
-              )}
-            </div>
-            <Progress value={course.progress} className="h-3" />
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Course Content */}
-      <div className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="modules" className="space-y-6">
-          <TabsList className="grid w-full md:w-[400px] grid-cols-2">
-            <TabsTrigger value="modules">Course Modules</TabsTrigger>
-            <TabsTrigger value="about">About Course</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="modules" className="space-y-4">
-            <div className="grid lg:grid-cols-3 gap-6">
-              {/* Modules List */}
-              <div className="lg:col-span-2 space-y-4">
-                {course.modules.map((module, index) => (
-                  <ModuleCard
-                    key={module.id}
-                    module={module}
-                    index={index}
-                    isActive={activeModule === module.id}
-                    onModuleClick={handleModuleClick}
-                    onModuleComplete={handleModuleComplete}
-                  />
-                ))}
-              </div>
-
-              {/* Module Preview */}
-              <div className="lg:col-span-1">
-                <Card className="sticky top-4">
-                  <CardHeader>
-                    <CardTitle>Module Preview</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {course.modules.find((m) => m.id === activeModule) && (
-                      <div className="space-y-4">
-                        <div className="aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                          {course.modules.find((m) => m.id === activeModule)
-                            ?.isLocked ? (
-                            <Lock className="w-12 h-12 text-gray-400" />
+          {/* Module List */}
+          <ScrollArea className="flex-1">
+            <div className="p-2">
+              {course.modules.map((module, moduleIndex) => (
+                <div key={module.id} className="mb-2">
+                  <Collapsible
+                    open={module.isExpanded}
+                    onOpenChange={() => toggleModule(module.id)}
+                  >
+                    <CollapsibleTrigger className="w-full">
+                      <div className="flex items-center justify-between p-3 hover:bg-accent rounded-lg transition-colors">
+                        <div className="flex items-center gap-2">
+                          {module.isExpanded ? (
+                            <ChevronDown className="h-4 w-4" />
                           ) : (
-                            <PlayCircle className="w-12 h-12 text-gray-400" />
+                            <ChevronRight className="h-4 w-4" />
                           )}
+                          <span className="font-medium text-sm">
+                            Module {moduleIndex + 1}: {module.title}
+                          </span>
                         </div>
-                        <h4 className="font-semibold">
-                          {
-                            course.modules.find((m) => m.id === activeModule)
-                              ?.title
-                          }
-                        </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {
-                            course.modules.find((m) => m.id === activeModule)
-                              ?.description
-                          }
-                        </p>
+                        {module.isCompleted && (
+                          <CheckCircle2 className="h-4 w-4 text-green-500" />
+                        )}
                       </div>
-                    )}
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <div className="ml-3 space-y-1">
+                        {module.lessons.map((lesson, lessonIndex) => (
+                          <button
+                            key={lesson.id}
+                            onClick={() => handleLessonClick(lesson, module)}
+                            disabled={lesson.isLocked}
+                            className={cn(
+                              "w-full text-left p-3 rounded-lg transition-colors flex items-center gap-3",
+                              currentLesson?.id === lesson.id
+                                ? "bg-primary text-primary-foreground"
+                                : "hover:bg-accent",
+                              lesson.isLocked && "opacity-50 cursor-not-allowed"
+                            )}
+                          >
+                            <div className="flex-shrink-0">
+                              {lesson.isCompleted ? (
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                              ) : lesson.isLocked ? (
+                                <Lock className="h-4 w-4" />
+                              ) : (
+                                <PlayCircle className="h-4 w-4" />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium truncate">
+                                {lessonIndex + 1}. {lesson.title}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {lesson.duration}
+                              </p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Bar */}
+        <header className="border-b bg-card">
+          <div className="flex items-center justify-between p-4">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+
+              {/* Breadcrumb */}
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="/">
+                      <Home className="h-4 w-4" />
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="/courses">Courses</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={`/course/${course.id}`}>
+                      {course.title}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {currentModule && (
+                    <>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>{currentModule.title}</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm">
+                Previous
+              </Button>
+              <Button variant="outline" size="sm">
+                Next
+              </Button>
+            </div>
+          </div>
+        </header>
+
+        {/* Video Content Area */}
+        <div className="flex-1 overflow-auto">
+          <div className="container mx-auto max-w-6xl p-6">
+            {currentLesson ? (
+              <>
+                {/* Video Player */}
+                <Card className="mb-6">
+                  <CardContent className="p-0">
+                    <VideoPlayer
+                      videoUrl={currentLesson.videoUrl}
+                      onComplete={handleLessonComplete}
+                      title={currentLesson.title}
+                    />
                   </CardContent>
                 </Card>
-              </div>
-            </div>
-          </TabsContent>
 
-          <TabsContent value="about" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>About This Course</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h3 className="font-semibold mb-2">What you'll learn</h3>
-                  <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                    <li>
-                      Build modern web applications with React and TypeScript
-                    </li>
-                    <li>Master advanced React patterns and best practices</li>
-                    <li>Implement efficient state management solutions</li>
-                    <li>Write clean, maintainable, and testable code</li>
-                  </ul>
+                {/* Lesson Info */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h1 className="text-2xl font-bold mb-2">
+                        {currentLesson.title}
+                      </h1>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          {currentLesson.duration}
+                        </span>
+                        {currentLesson.isCompleted && (
+                          <Badge variant="success">
+                            <CheckCircle2 className="h-3 w-3 mr-1" />
+                            Completed
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+
+                    {!currentLesson.isCompleted && (
+                      <Button onClick={handleLessonComplete}>
+                        Mark as Complete
+                      </Button>
+                    )}
+                  </div>
                 </div>
 
-                <div>
-                  <h3 className="font-semibold mb-2">Requirements</h3>
-                  <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                    <li>Basic understanding of HTML, CSS, and JavaScript</li>
-                    <li>Familiarity with ES6+ features</li>
-                    <li>A computer with internet connection</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
-  );
-};
+                {/* Tabs for Additional Content */}
+                <Tabs defaultValue="overview" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="resources">Resources</TabsTrigger>
+                    <TabsTrigger value="notes">Notes</TabsTrigger>
+                  </TabsList>
 
-// Module Card Component
-interface ModuleCardProps {
-  module: Module;
-  index: number;
-  isActive: boolean;
-  onModuleClick: (moduleId: string, isLocked: boolean) => void;
-  onModuleComplete: (moduleId: string) => void;
-}
+                  <TabsContent value="overview" className="mt-4">
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="font-semibold mb-2">
+                          About this lesson
+                        </h3>
+                        <p className="text-muted-foreground">
+                          {currentLesson.description ||
+                            "No description available for this lesson."}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
 
-const ModuleCard: React.FC<ModuleCardProps> = ({
-  module,
-  index,
-  isActive,
-  onModuleClick,
-  onModuleComplete,
-}) => {
-  return (
-    <Card
-      className={cn(
-        "transition-all cursor-pointer hover:shadow-lg",
-        isActive && "ring-2 ring-blue-500",
-        module.isLocked && "opacity-60"
-      )}
-      onClick={() => onModuleClick(module.id, module.isLocked)}
-    >
-      <CardContent className="p-6">
-        <div className="flex items-start gap-4">
-          <div
-            className={cn(
-              "w-12 h-12 rounded-full flex items-center justify-center text-white font-bold",
-              module.isCompleted
-                ? "bg-green-500"
-                : module.isLocked
-                ? "bg-gray-400"
-                : "bg-blue-500"
-            )}
-          >
-            {module.isCompleted ? (
-              <CheckCircle2 className="w-6 h-6" />
-            ) : module.isLocked ? (
-              <Lock className="w-5 h-5" />
+                  <TabsContent value="resources" className="mt-4">
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="font-semibold mb-4">
+                          Downloadable Resources
+                        </h3>
+                        {currentLesson.resources &&
+                        currentLesson.resources.length > 0 ? (
+                          <div className="space-y-2">
+                            {currentLesson.resources.map((resource) => (
+                              <div
+                                key={resource.id}
+                                className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent transition-colors"
+                              >
+                                <div className="flex items-center gap-3">
+                                  <FileText className="h-5 w-5 text-muted-foreground" />
+                                  <div>
+                                    <p className="font-medium">
+                                      {resource.title}
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                      {resource.type.toUpperCase()} File
+                                    </p>
+                                  </div>
+                                </div>
+                                <Button variant="ghost" size="sm">
+                                  <Download className="h-4 w-4 mr-2" />
+                                  Download
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-muted-foreground">
+                            No resources available for this lesson.
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="notes" className="mt-4">
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="font-semibold mb-4">Your Notes</h3>
+                        <textarea
+                          className="w-full min-h-[200px] p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                          placeholder="Take notes about this lesson..."
+                        />
+                        <Button className="mt-4">Save Notes</Button>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+              </>
             ) : (
-              index + 1
+              <Card>
+                <CardContent className="py-12 text-center">
+                  <BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                  <h2 className="text-xl font-semibold mb-2">
+                    Select a lesson to begin
+                  </h2>
+                  <p className="text-muted-foreground">
+                    Choose a lesson from the sidebar to start learning
+                  </p>
+                </CardContent>
+              </Card>
             )}
-          </div>
-
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold">{module.title}</h3>
-              {module.isLocked && (
-                <Badge variant="secondary">
-                  <Lock className="w-3 h-3 mr-1" />
-                  Locked
-                </Badge>
-              )}
-              {module.isCompleted && (
-                <Badge className="bg-green-500">Completed</Badge>
-              )}
-            </div>
-
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {module.description}
-            </p>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <div className="flex items-center gap-1">
-                  <BookOpen className="w-4 h-4" />
-                  <span>{module.lessons} lessons</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  <span>{module.duration}</span>
-                </div>
-              </div>
-
-              {!module.isLocked && !module.isCompleted && (
-                <Button
-                  size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onModuleComplete(module.id);
-                  }}
-                >
-                  Mark Complete
-                </Button>
-              )}
-
-              {!module.isLocked && module.isCompleted && (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  Review
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              )}
-            </div>
           </div>
         </div>
+      </main>
 
-        {module.isLocked && (
-          <Alert className="mt-4">
-            <Lock className="w-4 h-4" />
-            <AlertDescription>
-              Complete the previous module to unlock this content
-            </AlertDescription>
-          </Alert>
-        )}
-      </CardContent>
-    </Card>
+      {/* Mobile Overlay */}
+      {isMobile && sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+    </div>
   );
 };
 

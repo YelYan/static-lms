@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 // import {
 //   Card,
 //   CardHeader,
@@ -5,7 +6,6 @@
 //   CardFooter,
 //   CardDescription,
 // } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 // import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 // import CourseDialog from "./CourseDialog";
