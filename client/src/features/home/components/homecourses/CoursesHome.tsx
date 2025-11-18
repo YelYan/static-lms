@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 // import {
 //   Card,
 //   CardHeader,
@@ -192,6 +193,7 @@ import { Button } from "@/components/ui/button";
 // ];
 
 const CoursesHome = () => {
+  const navigate = useNavigate();
   return (
     <section id="COURSES" className="bg-accent-foreground">
       <div className="container py-20">
@@ -551,6 +553,7 @@ const CoursesHome = () => {
                   </Button>
                   <Button
                     variant={"primary"}
+                    onClick={() => navigate(`/course-details/1`)}
                     className="bg-pink-400 border border-pink-400"
                   >
                     Explore Detail
