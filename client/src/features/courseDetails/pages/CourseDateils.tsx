@@ -494,7 +494,7 @@ const CourseDetails: React.FC = () => {
                           {currentLesson.duration}
                         </span>
                         {currentLesson.isCompleted && (
-                          <Badge variant="success">
+                          <Badge>
                             <CheckCircle2 className="h-3 w-3 mr-1" />
                             Completed
                           </Badge>
