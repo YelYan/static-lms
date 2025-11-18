@@ -1,5 +1,3 @@
-import LOGOPYTHON from "/img/python-logo.svg";
-import LOGOTENSOR from "/img/tensorflow-logo.png";
 import {
   Card,
   CardHeader,
@@ -195,26 +193,18 @@ const courseContent = [
 
 const CoursesHome = () => {
   return (
-    <section id="COURSES">
+    <section id="COURSES" className="bg-accent-foreground">
       <div className="container py-20">
         <div className="w-full">
           <div className="flex items-center justify-between font-telegraf-bold">
-            <div className="flex items-center gap-2">
-              <img src={LOGOPYTHON} width={55} height={55} alt="python logo" />
-              <img
-                src={LOGOTENSOR}
-                width={70}
-                height={70}
-                alt="tensorflow logo"
-              />
-            </div>
-            <h1 className="text-3xl md:text-7xl text-primary">COURSES</h1>
+            <div className="flex items-center gap-2"></div>
+            <h1 className="text-3xl md:text-5xl text-white">COURSES MODULES</h1>
           </div>
           {/* underline */}
-          <hr className="h-[3px] w-full bg-primary my-4" />
+          <hr className="h-[3px] w-full bg-white my-4" />
 
           {/* courses card */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-18">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-18">
             {courseContent.map(({ id, title, desc, image, details }) => (
               <Card className="font-telegraf-bold" key={id}>
                 <CardHeader className="text-center space-y-2 px-4">
@@ -247,11 +237,342 @@ const CoursesHome = () => {
                 </CardFooter>
               </Card>
             ))}
+          </div> */}
+          {/* courses card */}
+          <div className="space-y-8 mt-8">
+            {/* course 1 */}
+            <div className="bg-gray-700 rounded-md p-8">
+              <h2 className="font-telegraf-bold text-xl text-white uppercase mb-4">
+                Python for structrual engineers course
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-telegraf-regular text-white">
+                {/* module 1 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 1</h4>
+                    <p>Introduction to Python</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Course Introduction</li>
+                    <li>Welcome to the Pythonic World</li>
+                    <li>Data Types in Python</li>
+                    <li>Conditionals in Python</li>
+                    <li>Loop in Python</li>
+                    <li>Comprehesions in Python</li>
+                    <li>Generator and Decorator </li>
+                    <li>Object Oriented Programming with Python</li>
+                    <li>File and Exceptional Handling in python</li>
+                  </ul>
+                </div>
+                {/* module 2 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 2</h4>
+                    <p>Structural Design with Python</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Introduction : from Excel to Python</li>
+                    <li>Reinforced Concrete Section Design wih Python </li>
+                    <li>Steel member Design wih Python</li>
+                    <li>Steel Connection Design with python</li>
+                    <li>Structural Analysis with Python</li>
+                  </ul>
+                </div>
+                {/* module 3 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 3</h4>
+                    <p>
+                      Automation Structural FEM analysis workflow with Python
+                      (ETABS)
+                    </p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>What is automation & API?</li>
+                    <li>ETABS OAPI</li>
+                    <li>Basic FEM workflow</li>
+                    <li>Automated FEM preprocessing workflow with python</li>
+                    <li>
+                      Data and result Visualization with python and pandas,
+                      Matplotlib
+                    </li>
+                  </ul>
+                </div>
+                {/* module 4 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 4</h4>
+                    <p>Advanced topic</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Introduction</li>
+                    <li>
+                      Developing personal use concrete desigin concrete software{" "}
+                    </li>
+                    <li>Creating the UI with streamlit</li>
+                    <li>
+                      Deploying your software to the cloud to share for everyone
+                    </li>
+                    <li>Future of structural engineering in AI era</li>
+                    <li>Upcoming course</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mt-8 font-telegraf-bold">
+                <div className="lg:flex-shrink-0">
+                  <p className="text-white text-lg lg:text-xl font-telegraf font-bold px-6 py-4 rounded-lg inline-block">
+                    Lifetime access <br />
+                    <span className="text-2xl">$100</span>
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center w-full lg:w-auto">
+                  <Button variant={"primary"}>Start Learning Now</Button>
+                  <Button
+                    variant={"primary"}
+                    className="bg-pink-400 border border-pink-400"
+                  >
+                    Explore Detail
+                  </Button>
+                </div>
+              </div>
+            </div>
+            {/* course 2 */}
+            <div className="bg-gray-700 rounded-md p-8">
+              <h2 className="font-telegraf-bold text-xl text-white uppercase mb-4">
+                AI & machine leanring for structrual engineers course
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-telegraf-regular text-white">
+                {/* module 1 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 1</h4>
+                    <p>Introduction to Python</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Course Introduction</li>
+                    <li>Welcome to the Pythonic World</li>
+                    <li>Data Types in Python</li>
+                    <li>Conditionals in Python</li>
+                    <li>Loop in Python</li>
+                    <li>Comprehesions in Python</li>
+                    <li>Generator and Decorator </li>
+                    <li>Object Oriented Programming with Python</li>
+                    <li>File and Exceptional Handling in python</li>
+                  </ul>
+                </div>
+                {/* module 2 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 2</h4>
+                    <p>Structural Design with Python</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Introduction : from Excel to Python</li>
+                    <li>Reinforced Concrete Section Design wih Python </li>
+                    <li>Steel member Design wih Python</li>
+                    <li>Steel Connection Design with python</li>
+                    <li>Structural Analysis with Python</li>
+                  </ul>
+                </div>
+                {/* module 3 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 3</h4>
+                    <p>
+                      Automation Structural FEM analysis workflow with Python
+                      (ETABS)
+                    </p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>What is automation & API?</li>
+                    <li>ETABS OAPI</li>
+                    <li>Basic FEM workflow</li>
+                    <li>Automated FEM preprocessing workflow with python</li>
+                    <li>
+                      Data and result Visualization with python and pandas,
+                      Matplotlib
+                    </li>
+                  </ul>
+                </div>
+                {/* module 4 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 4</h4>
+                    <p>Advanced topic</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Introduction</li>
+                    <li>
+                      Developing personal use concrete desigin concrete software{" "}
+                    </li>
+                    <li>Creating the UI with streamlit</li>
+                    <li>
+                      Deploying your software to the cloud to share for everyone
+                    </li>
+                    <li>Future of structural engineering in AI era</li>
+                    <li>Upcoming course</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mt-8 font-telegraf-bold">
+                <div className="lg:flex-shrink-0">
+                  <p className="text-white text-lg lg:text-xl font-telegraf font-bold px-6 py-4 rounded-lg inline-block">
+                    Lifetime access <br />
+                    <span className="text-2xl">$100</span>
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center w-full lg:w-auto">
+                  <Button
+                    variant={"primary"}
+                    disabled
+                    className="bg-blue-400 pointer-events-none"
+                  >
+                    Coming Soon
+                  </Button>
+                  <Button
+                    variant={"primary"}
+                    className="bg-pink-400 border border-pink-400"
+                  >
+                    Explore Detail
+                  </Button>
+                </div>
+              </div>
+            </div>
+            {/* course 2 */}
+            <div className="bg-gray-700 rounded-md p-8">
+              <h2 className="font-telegraf-bold text-xl text-white uppercase mb-4">
+                AI & machine leanring for structrual engineers course
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-telegraf-regular text-white">
+                {/* module 1 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 1</h4>
+                    <p>Introduction to Python</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Course Introduction</li>
+                    <li>Welcome to the Pythonic World</li>
+                    <li>Data Types in Python</li>
+                    <li>Conditionals in Python</li>
+                    <li>Loop in Python</li>
+                    <li>Comprehesions in Python</li>
+                    <li>Generator and Decorator </li>
+                    <li>Object Oriented Programming with Python</li>
+                    <li>File and Exceptional Handling in python</li>
+                  </ul>
+                </div>
+                {/* module 2 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 2</h4>
+                    <p>Structural Design with Python</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Introduction : from Excel to Python</li>
+                    <li>Reinforced Concrete Section Design wih Python </li>
+                    <li>Steel member Design wih Python</li>
+                    <li>Steel Connection Design with python</li>
+                    <li>Structural Analysis with Python</li>
+                  </ul>
+                </div>
+                {/* module 3 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 3</h4>
+                    <p>
+                      Automation Structural FEM analysis workflow with Python
+                      (ETABS)
+                    </p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>What is automation & API?</li>
+                    <li>ETABS OAPI</li>
+                    <li>Basic FEM workflow</li>
+                    <li>Automated FEM preprocessing workflow with python</li>
+                    <li>
+                      Data and result Visualization with python and pandas,
+                      Matplotlib
+                    </li>
+                  </ul>
+                </div>
+                {/* module 4 */}
+                <div className="space-y-4">
+                  <div className="space-y-1 mt-3">
+                    <h4>Module 4</h4>
+                    <p>Advanced topic</p>
+                  </div>
+
+                  <ul className="list-disc pl-4 text-sm">
+                    <li>Introduction</li>
+                    <li>
+                      Developing personal use concrete desigin concrete software{" "}
+                    </li>
+                    <li>Creating the UI with streamlit</li>
+                    <li>
+                      Deploying your software to the cloud to share for everyone
+                    </li>
+                    <li>Future of structural engineering in AI era</li>
+                    <li>Upcoming course</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mt-8 font-telegraf-bold">
+                <div className="lg:flex-shrink-0">
+                  <p className="text-white text-lg lg:text-xl font-telegraf font-bold px-6 py-4 rounded-lg inline-block">
+                    Lifetime access <br />
+                    <span className="text-2xl">$100</span>
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center w-full lg:w-auto">
+                  <Button
+                    variant={"primary"}
+                    disabled
+                    className="bg-blue-400 pointer-events-none"
+                  >
+                    Coming Soon
+                  </Button>
+                  <Button
+                    variant={"primary"}
+                    className="bg-pink-400 border border-pink-400"
+                  >
+                    Explore Detail
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <p className="text-center text-xl text-primary font-telegraf-bold mt-18">
-            Upgrade your career to be ready for AI world !
-          </p>
+          <div className="text-white text-center py-40 font-telegraf-bold space-y-8">
+            <p className="text-2xl md:text-6xl">3 Course Bundler</p>
+            <p className="text-xl md:text-5xl">
+              $599/ <span className="line-through opacity-50">$698</span>
+            </p>
+            <Button
+              variant={"primary"}
+              className="text-lg rounded-3xl"
+              size={"lg"}
+            >
+              Start Learning Now
+            </Button>
+          </div>
         </div>
       </div>
     </section>
