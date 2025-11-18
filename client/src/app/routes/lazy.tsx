@@ -24,3 +24,6 @@ export const LazyDashboard = lazy(
 export const LazyDashboardProject = lazy(
   () => import("@/features/dashborad/pages/DashboardProject")
 );
+export const LazyCourseDetails = lazy(
+  () => import("@/features/courseDetails/pages/CourseDateils")
+);

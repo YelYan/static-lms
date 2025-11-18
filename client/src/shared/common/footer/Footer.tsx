@@ -26,14 +26,9 @@ const Footer = () => {
         <hr className="h-[1px] w-full bg-white my-4" />
         <div className="grid gap-12 mt-20">
           <div className="flex flex-col gap-1">
-            <h2 className="text-2xl">Zwe Yan Naing</h2>
-            <h2 className="text-xl">+123-456-7890</h2>
-            <h2 className="text-xl">
-              Find my resume{" "}
-              <a href="#" className="underline cursor-pointer">
-                here
-              </a>
-            </h2>
+            <h2 className="text-2xl">Jimmy Cook</h2>
+            <h2 className="text-xl">MENG.Structural Engineering</h2>
+            <h2 className="text-xl">AI & ML Specialist</h2>
           </div>
 
           <div className="space-y-2">

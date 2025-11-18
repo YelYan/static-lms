@@ -1,4 +1,6 @@
 import type { RoutesT } from "../../../types/route.type";
+// import { LazyCourseDetails } from "../lazy";
+
 export const allPrivateRoutes: RoutesT = [
   {
     key: "about",
@@ -10,6 +12,11 @@ export const allPrivateRoutes: RoutesT = [
     path: "/contact",
     element: <>private contact testing</>,
   },
+  // {
+  //   key: "course-details",
+  //   path: "/course-details/:courseId",
+  //   element: <LazyCourseDetails />,
+  // },
 ];
 
 export default allPrivateRoutes;
