@@ -37,7 +37,7 @@ const Highlight = () => {
         <h1 className="font-telegraf-bold text-2xl md:text-7xl text-white">
           Course Project Highlights
         </h1>
-        <p className="text-white font-telegraf-regular w-2xl mx-auto text-lg md:text-xl">
+        <p className="text-white font-telegraf-regular w-full max-w-2xl mx-auto text-base md:text-lg lg:text-xl px-4 md:px-0">
           In this course, you won't just learn—you'll build. By the final
           module, you will have completed a set of real-world projects that not
           only solidify your understanding
@@ -54,7 +54,7 @@ const Highlight = () => {
         ))}
       </div>
 
-      <div className="text-center space-y-10 mt-20">
+      <div className="text-center space-y-15 mt-20">
         <h1 className="font-telegraf-bold text-xl md:text-3xl text-white">
           Begineer Friendly Courses
         </h1>
@@ -67,7 +67,7 @@ const Highlight = () => {
             Self Paced Online Courses
           </p>
           <p className="text-blue-600 text-2xl font-telegraf-bold">
-            Real World Engineering Appkication
+            Real World Engineering Application
           </p>
           <p className="text-white text-2xl font-telegraf-bold">
             Life Time Access

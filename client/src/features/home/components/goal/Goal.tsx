@@ -2,7 +2,7 @@ import useResponsive from "@/shared/hooks/useResponsive";
 
 const DesktopGoals = () => {
   return (
-    <div className="container py-20 grid grid-cols-[1fr_2fr] gap-10 items-center h-lvh">
+    <div className="container pt-0  grid grid-cols-[1fr_2fr] gap-10 items-center h-[66vh]">
       <div className="h-full p-8 grid place-content-center w-full">
         <h1 className="font-telegraf-bold text-2xl md:text-7xl text-center text-white">
           Future is <br /> here!
@@ -22,7 +22,7 @@ const DesktopGoals = () => {
 
 const MobileTabletGoals = () => {
   return (
-    <div className="container py-10 grid grid-cols-1 gap-10 items-center h-lvh">
+    <div className="container py-10 grid grid-cols-1 gap-5 items-center h-[65vh]">
       <div className="h-full p-8 grid place-content-center w-full">
         <h1 className="font-telegraf-bold text-5xl text-center text-primary">
           Future is <br /> here!

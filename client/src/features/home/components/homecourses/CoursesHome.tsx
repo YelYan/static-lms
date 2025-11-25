@@ -196,7 +196,7 @@ const CoursesHome = () => {
   const navigate = useNavigate();
   return (
     <section id="COURSES" className="bg-accent-foreground">
-      <div className="container py-20">
+      <div className="container pt-20 pb-10">
         <div className="w-full">
           <div className="flex items-center justify-between font-telegraf-bold">
             <div className="flex items-center gap-2"></div>
@@ -563,7 +563,7 @@ const CoursesHome = () => {
             </div>
           </div>
 
-          <div className="text-white text-center py-40 font-telegraf-bold space-y-8">
+          <div className="text-white text-center pt-20 pb-0 font-telegraf-bold space-y-8">
             <p className="text-2xl md:text-6xl">3 Course Bundler</p>
             <p className="text-xl md:text-5xl">
               $599/ <span className="line-through opacity-50">$698</span>

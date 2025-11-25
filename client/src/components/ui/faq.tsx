@@ -51,15 +51,19 @@ const Faq1 = ({
   ],
 }: Faq1Props) => {
   return (
-    <section>
-      <div className="max-w-3xl font-telegraf-bold">
-        <Accordion type="single" collapsible>
-          {items.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="font-semibold hover:no-underline text-xl  md:text-3xl">
+    <section className="w-full">
+      <div className="w-full font-telegraf-bold">
+        <Accordion type="single" collapsible className="w-full">
+          {items.map((item) => (
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="w-full border-b border-white/20"
+            >
+              <AccordionTrigger className="w-full font-semibold hover:no-underline text-xl md:text-3xl py-6 text-left">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="text-white opacity-70 text-lg md:text-xl">
+              <AccordionContent className="text-white opacity-70 text-lg md:text-xl pb-6">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

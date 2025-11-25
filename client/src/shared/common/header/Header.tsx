@@ -18,6 +18,10 @@ import { Link, useLocation } from "react-router";
 
 const links = [
   {
+    id: "/",
+    label: "HOME",
+  },
+  {
     id: "COURSES",
     label: "COURSES",
   },

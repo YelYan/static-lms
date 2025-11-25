@@ -13,8 +13,9 @@ const EngineeringAIAbout = () => {
       <hr className="h-[3px] w-full bg-foreground my-4" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* video */}
-        <div className="h-fit">
+        <div className="h-[50vh] ">
           <video
+            className="h-full"
             src="https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
             controls
           >
@@ -44,7 +45,7 @@ const EngineeringAIAbout = () => {
 
 const DesktopAboutHome = () => {
   return (
-    <div className="container py-20">
+    <div className="container pt-20 pb-5">
       <div className="w-full font-telegraf-bold">
         <div className="flex items-center justify-center">
           <h1 className="text-2xl md:text-7xl">WHAT WE TEACH?</h1>
