@@ -1,5 +1,5 @@
 import { useLocation } from "react-router";
-import { resetPasswordSchema } from "@/types/schemas.type";
+// import { resetPasswordSchema } from "@/types/schemas.type";
 import AuthForm from "../components/AuthForm";
 import { resetPasswordFormControls } from "@/shared/constants";
 import { useResetPassword } from "@/services/auth/auth-api-client";
@@ -25,7 +25,7 @@ const ResetPassword = () => {
         type="reset"
         onSubmit={onSubmit}
         formControls={resetPasswordFormControls}
-        formSchemas={resetPasswordSchema}
+        // formSchemas={resetPasswordSchema}
         isPending={resetpasswordMutation.isPending}
         isSuccess={resetpasswordMutation.isSuccess}
         formValues={{ confirmPassword: "", password: "" }}

@@ -1,26 +1,54 @@
-import { loginformControls, registerformControls, forgotPasswordformControls, resetPasswordFormControls } from "@/shared/constants";
-import { buildSchemas } from "@/shared/hooks/buildSchemas";
+import { z } from "zod";
 
-export type AuthType = "login" | "signup" | "forgot" | "reset";
+// Login Schema
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .min(6, "Password must be at least 6 characters"),
+});
 
-export type FormControlsT = Record<"name" | "label" | "componentType" , string> & { 
-    type? : string
-    placeholder?: string;
-    validation?: {required : boolean , maxLength? : number , minLength? : number}
-};
+// Register Schema
+export const registerSchema = z
+  .object({
+    name: z
+      .string()
+      .min(1, "Full name is required")
+      .min(2, "Name must be at least 2 characters")
+      .max(50, "Name must be less than 50 characters")
+      .regex(/^[a-zA-Z\s]*$/, "Name can only contain letters and spaces"),
+    email: z
+      .string()
+      .min(1, "Email is required")
+      .email("Please enter a valid email address"),
+    password: z
+      .string()
+      .min(1, "Password is required")
+      .min(6, "Password must be at least 6 characters")
+      .max(50, "Password must be less than 50 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number"),
+    confirmPassword: z.string().min(1, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
-export const loginSchema = buildSchemas(loginformControls);
-export const registerSchema = buildSchemas(registerformControls);
-export const forgotpasswordSchema = buildSchemas(forgotPasswordformControls)
-export const resetPasswordSchema = buildSchemas(resetPasswordFormControls)
+// Forgot Password Schema
+export const forgotPasswordSchema = z.object({
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address"),
+});
 
-export type AuthFormPropsT = {
-  isSuccess?: boolean;
-  type?: AuthType;
-  onSubmit: (data: unknown) => void;
-  formControls: FormControlsT[] ;
-  formValues: Record<string, unknown>;
-  formSchemas: typeof loginSchema | typeof registerSchema | typeof forgotpasswordSchema | typeof resetPasswordSchema;
-  isPending?: boolean;
-};
-
+// Types (for TypeScript users - optional)
+// export type LoginFormData = z.infer<typeof loginSchema>;
+// export type RegisterFormData = z.infer<typeof registerSchema>;
+// export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;

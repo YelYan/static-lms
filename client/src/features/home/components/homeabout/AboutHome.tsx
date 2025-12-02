@@ -13,10 +13,10 @@ const EngineeringAIAbout = () => {
       <hr className="h-[3px] w-full bg-foreground my-4" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* video */}
-        <div className="h-[50vh] ">
+        <div className="h-[50vh] w-full">
           <video
             className="h-full"
-            src="https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+            src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             controls
           >
             Your browser does not support video tag.

@@ -59,7 +59,7 @@ const Highlight = () => {
           Begineer Friendly Courses
         </h1>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
           <p className="text-blue-600 text-2xl font-telegraf-bold">
             No programming experience required
           </p>

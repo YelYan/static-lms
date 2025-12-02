@@ -1,30 +1,29 @@
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/shared/hooks/useAuth";
-import type { JSX } from "react";
+import type React from "react";
 import { LoadingSpinner } from "@/shared/common";
 
-type AuthGuardpropsT = { children: JSX.Element; allowedRoles?: string[] };
-
-const AuthGuard = ({ children, allowedRoles }: AuthGuardpropsT) => {
-  const { user, isLoading, isLoggedIn } = useAuth();
+const ProtectedRoute = ({
+  children,
+  requireVerified = false,
+}: {
+  children: React.ReactNode;
+  requireVerified: boolean;
+}) => {
+  const { currentUser, isEmailVerified, loading } = useAuth();
   const location = useLocation();
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (loading) <LoadingSpinner />;
 
-  // store the page user wanted to visit
-  if (!user && !isLoggedIn) {
+  if (!currentUser) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // Role-based protection
-  if (allowedRoles && user && !allowedRoles.includes(user?.role)) {
-    return <Navigate to="/" replace />;
+  if (requireVerified && !isEmailVerified) {
+    return <Navigate to="/verify-email" replace />;
   }
 
-  // Allow access
   return children;
 };
 
-export default AuthGuard;
+export default ProtectedRoute;
