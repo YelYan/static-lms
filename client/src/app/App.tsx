@@ -34,7 +34,7 @@ const routes = createRoutesFromElements(
             key={route.key + index}
             path={route.path}
             element={
-              <AuthGuard>
+              <AuthGuard requireVerified={true}>
                 <Suspense fallback={<LoadingSpinner />}>
                   {route.element}
                 </Suspense>
@@ -65,7 +65,7 @@ const routes = createRoutesFromElements(
           key={route.key + index}
           path={route.path}
           element={
-            <AuthGuard allowedRoles={["admin"]}>
+            <AuthGuard requireVerified={true}>
               <Suspense fallback={<LoadingSpinner />}>{route.element}</Suspense>
             </AuthGuard>
           }

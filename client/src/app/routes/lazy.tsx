@@ -8,9 +8,6 @@ export const LazyRegister = lazy(
 export const LazyForgotPassword = lazy(
   () => import("@/features/auth/pages/ForgotPassword")
 );
-export const LazyResetPassword = lazy(
-  () => import("@/features/auth/pages/ResetPassword")
-);
 export const LazyOTPPage = lazy(() => import("@/features/auth/pages/OTPPage"));
 
 /* Private pages */
